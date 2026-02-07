@@ -1,0 +1,55 @@
+.page {
+    background: var(--surface);
+    min-height: calc(100vh - 70px);
+}
+
+.heroImage {
+    position: relative;
+    height: 400px;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+}
+
+.heroContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 40px;
+    z-index: 1;
+}
+
+.heroTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.spotCard {
+    background: var(--surface);
+    padding: 16px;
+    border-radius: 12px;
+    border-left: 3px solid var(--primary);
+}
+
+.bookingCard {
+    position: sticky;
+    top: 90px;
+}
+
+@media (max-width: 768px) {
+    .heroImage {
+        height: 300px;
+    }
+
+    .heroTitle {
+        font-size: 1.75rem;
+    }
+
+    .bookingCard {
+        position: static;
+    }
+}

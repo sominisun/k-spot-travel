@@ -1,0 +1,76 @@
+.card {
+    display: block;
+    text-decoration: none;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.imageWrapper {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.discount {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--coral);
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.content {
+    padding: 16px;
+}
+
+.source {
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+}
+
+.title {
+    line-height: 1.4;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    line-height: 1.4;
+}
+
+.meta {
+    color: var(--text-muted);
+}

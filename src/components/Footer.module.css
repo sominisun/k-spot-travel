@@ -1,0 +1,44 @@
+.footer {
+    background: #1a1a1a;
+    padding: 60px 0 24px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+}
+
+.logo {
+    display: flex;
+    align-items: baseline;
+    text-decoration: none;
+}
+
+.socialLink {
+    transition: color 0.2s ease;
+}
+
+.socialLink:hover {
+    color: white !important;
+}
+
+.bottom {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #333;
+}
+
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+}
+
+@media (max-width: 576px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+}
