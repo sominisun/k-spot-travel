@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* ---- Design constitution: white paper, ink, one indigo. 4px/8px radii. ---- */
+@theme {
+  --color-paper: #ffffff;
+  --color-band: #f7f8fa;
+  --color-ink: #16181d;
+  --color-ink-soft: #454a54;
+  --color-ink-faint: #878d98;
+  --color-line: #e5e7eb;
+  --color-indigo: #1e3a6e;
+  --color-indigo-deep: #16294e;
+  --color-indigo-soft: #edf1f8;
+  --color-celadon: #4a7a6d;
+  --color-kred: #c8102e;
+}
+
+/* Runtime font mapping — --fd/--fb are set per locale below. */
+@theme inline {
+  --font-display: var(--fd);
+  --font-body: var(--fb);
+}
+
+html.loc-en,
+html.loc-es {
+  --fd: var(--f-caslon), Georgia, serif;
+  --fb: var(--f-inter), system-ui, sans-serif;
+}
+html.loc-ko {
+  --fd: var(--f-serif-kr), var(--f-caslon), serif;
+  --fb: var(--f-sans-kr), var(--f-inter), sans-serif;
+}
+html.loc-ja {
+  --fd: var(--f-serif-jp), var(--f-caslon), serif;
+  --fb: var(--f-sans-jp), var(--f-inter), sans-serif;
+}
+html.loc-zh {
+  --fd: var(--f-serif-sc), var(--f-caslon), serif;
+  --fb: var(--f-sans-sc), var(--f-inter), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--fb);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-indigo-soft);
+  color: var(--color-indigo-deep);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px !important;
+}

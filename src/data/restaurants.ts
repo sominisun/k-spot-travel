@@ -1,0 +1,277 @@
+import type { Restaurant } from "../lib/types";
+
+// Culinary Class Wars chefs' restaurants (verified via press/booking guides)
+// + screen-famous institutions. Status can change — booking notes say how to confirm.
+export const restaurants: Restaurant[] = [
+  {
+    slug: "toledo-pasta-bar",
+    name: "Toledo Pasta Bar",
+    koreanName: "토레도 파스타바",
+    chef: "Kwon Seong-jun (Napoli Mafia)",
+    sourceShow: "Culinary Class Wars",
+    cuisine: "Italian (Neapolitan/Sicilian)",
+    region: "seoul",
+    area: "Yeonnam/Donggyo, Mapo-gu",
+    address: "Donggyo-ro area, Mapo-gu, Seoul",
+    priceRange: "$$",
+    signature: ["Handmade pasta tasting", "Sicilian-style seafood pasta"],
+    bookingMethod:
+      "CatchTable app — slots vanish within minutes of release since the Season 1 win. Set an alarm for the drop time (check the restaurant's Instagram for the current schedule); walk-ins effectively impossible.",
+    description:
+      "The Season 1 winner's intimate pasta bar in Mapo. 'Napoli Mafia' became a household name overnight, and his counter remains one of the hardest seats in Seoul — a bucket-list booking for show fans.",
+    tips: [
+      "Solo diners have slightly better odds at the counter.",
+      "Follow the official Instagram — reservation windows and menu changes post there first.",
+    ],
+    mapQuery: "Toledo Pasta Bar, Mapo-gu, Seoul",
+    themeColor: "coral",
+  },
+  {
+    slug: "trid-seoul",
+    name: "Trid",
+    koreanName: "트리드",
+    chef: "Kang Seung-won (Triple Star)",
+    sourceShow: "Culinary Class Wars",
+    cuisine: "Contemporary fine dining",
+    region: "seoul",
+    area: "Gangnam-gu, Seoul",
+    address: "Seolleung-ro area, Gangnam-gu, Seoul",
+    priceRange: "$$$$",
+    signature: ["Seasonal tasting course"],
+    bookingMethod:
+      "CatchTable, typically opening about a month ahead; dinner books out fastest. Lunch course is the value entry point.",
+    description:
+      "Runner-up 'Triple Star' commands this polished Gangnam fine-diner. Precise, produce-driven tasting menus that show why he pushed the finale to the wire.",
+    tips: [
+      "Lunch offers most of the fireworks at a friendlier price.",
+      "Mention dietary limits at booking — courses are fixed.",
+    ],
+    mapQuery: "Trid, Gangnam-gu, Seoul",
+    themeColor: "night",
+  },
+  {
+    slug: "choi-dot",
+    name: "Choi Dot",
+    koreanName: "쵸이닷",
+    chef: "Choi Hyun-seok",
+    sourceShow: "Culinary Class Wars",
+    cuisine: "Modern European",
+    region: "seoul",
+    area: "Apgujeong/Dosan, Gangnam-gu",
+    address: "Dosan-daero 457 area, Gangnam-gu, Seoul",
+    priceRange: "$$$",
+    signature: ["Jang-trio steak", "Playful modern-Korean twists on French technique"],
+    bookingMethod:
+      "CatchTable or Naver Reservations; weekday lunches are gettable with a few days' notice, weekend dinners need 2–4 weeks.",
+    description:
+      "The flamboyant White Spoon veteran's Dosan flagship — theatrical plating, deep Korean flavor logic, and the show's most quotable chef in his element.",
+    tips: [
+      "Ask for counter-adjacent seating to watch the pass.",
+      "Verify current hours on CatchTable — Dosan restaurants shuffle often.",
+    ],
+    mapQuery: "Choi Dot, Dosan-daero, Seoul",
+    themeColor: "sunset",
+  },
+  {
+    slug: "tian-mi-mi",
+    name: "Tian Mi Mi",
+    koreanName: "티엔미미",
+    chef: "Jung Ji-sun (Queen of Dim Sum)",
+    sourceShow: "Culinary Class Wars",
+    cuisine: "Chinese / Hong Kong dim sum",
+    region: "seoul",
+    area: "Gangnam & Hongdae branches, Seoul",
+    address: "Multiple branches, Seoul",
+    priceRange: "$$",
+    signature: ["Xiao long bao", "Shrimp har gow", "Hong Kong-style noodles"],
+    bookingMethod:
+      "Most branches take walk-ins with a waitlist app at the door; peak weekend waits run 30–60 min. CatchTable covers some branches.",
+    description:
+      "The 'Queen of Dim Sum' runs Seoul's most approachable CCW stop — proper Hong Kong dim sum at everyday prices, no reservation warfare required.",
+    tips: [
+      "The most accessible chef restaurant on this list — ideal for CCW fans without booking luck.",
+      "Go before 11:30am to skip the first lunch wave.",
+    ],
+    mapQuery: "Tian Mi Mi, Seoul",
+    themeColor: "gold",
+  },
+  {
+    slug: "fabri-kitchen",
+    name: "Fabri Kitchen",
+    koreanName: "파브리키친",
+    chef: "Fabrizio Ferrari (Chef Fabri)",
+    sourceShow: "Culinary Class Wars",
+    cuisine: "Italian seafood",
+    region: "seoul",
+    area: "Yongsan-gu, Seoul",
+    address: "Hangang-daero area, Yongsan-gu, Seoul",
+    priceRange: "$$",
+    bookingMethod:
+      "CatchTable or Naver; a few days ahead usually suffices on weekdays. English-friendly — the chef often greets tables himself.",
+    signature: ["Whole-fish crudo", "Seafood pasta"],
+    description:
+      "The affable Italian White Spoon's Yongsan trattoria — honest coastal-Italian cooking and the friendliest chef-table energy of the CCW alumni.",
+    tips: [
+      "One of the easiest CCW tables for non-Korean speakers.",
+      "Ask about the day's fish before ordering pasta — crudo first is the move.",
+    ],
+    mapQuery: "Fabri Kitchen, Yongsan-gu, Seoul",
+    themeColor: "ocean",
+  },
+  {
+    slug: "deepin",
+    name: "Deepin",
+    koreanName: "디핀",
+    chef: "Yoon Nam-no (Cooking Maniac)",
+    sourceShow: "Culinary Class Wars",
+    cuisine: "Italian pasta",
+    region: "seoul",
+    area: "Oksu & Sindang, Seoul",
+    address: "Oksu-dong / Sindang-dong, Seoul",
+    priceRange: "$$",
+    signature: ["Inventive seasonal pasta"],
+    bookingMethod:
+      "CatchTable; the Sindang branch is often the easier book. Post-show demand stays high on weekends.",
+    description:
+      "Black Spoon standout 'Cooking Maniac' turns obsessive technique into some of Seoul's most talked-about pasta — casual room, serious plates.",
+    tips: [
+      "Weekday first seating is the reliable slot.",
+      "Menus rotate fast; whatever is newest is usually the one to order.",
+    ],
+    mapQuery: "Deepin, Oksu, Seoul",
+    themeColor: "forest",
+  },
+  {
+    slug: "mosu-seoul",
+    name: "Mosu",
+    koreanName: "모수",
+    chef: "Anh Sung-jae (Judge)",
+    sourceShow: "Culinary Class Wars",
+    cuisine: "Contemporary Korean fine dining",
+    region: "seoul",
+    area: "Yongsan-gu, Seoul",
+    address: "Itaewon-ro area, Yongsan-gu, Seoul",
+    priceRange: "$$$$",
+    signature: ["Multi-course Korean tasting at three-Michelin-star level"],
+    bookingMethod:
+      "Korea's toughest reservation: released online in monthly windows and gone in minutes. The restaurant paused operations and staged a relaunch — confirm current status and booking channel on its official site/Instagram before planning around it.",
+    description:
+      "Judge Anh Sung-jae's three-Michelin-star flagship — the standard 'permission to dream' table of Korean fine dining and the pinnacle booking for CCW pilgrims.",
+    tips: [
+      "Treat it as a lottery ticket, not a plan — have Trid or Choi Dot as backup.",
+      "Solo counter requests occasionally clear the waitlist faster.",
+    ],
+    mapQuery: "Mosu Seoul, Itaewon",
+    themeColor: "night",
+  },
+  {
+    slug: "myeongdong-kyoja",
+    name: "Myeongdong Kyoja",
+    koreanName: "명동교자",
+    cuisine: "Kalguksu (knife-cut noodles)",
+    sourceShow: "Countless K-food shows",
+    region: "seoul",
+    area: "Myeongdong, Jung-gu",
+    address: "29 Myeongdong 10-gil, Jung-gu, Seoul",
+    priceRange: "$",
+    signature: ["Kalguksu in chicken broth", "Plump mandu", "Famously fierce kimchi"],
+    bookingMethod:
+      "No reservations — the queue moves fast (shared tables, quick turnover). Cash or card at the counter.",
+    description:
+      "A Michelin Bib Gourmand noodle institution since 1966 and a fixture of every Seoul food pilgrimage — four things on the menu, all perfect.",
+    tips: [
+      "The garlicky kimchi is the strongest in Seoul — you were warned.",
+      "Free noodle refills on request; just ask 'sari juseyo'.",
+    ],
+    mapQuery: "Myeongdong Kyoja, Seoul",
+    themeColor: "gold",
+  },
+  {
+    slug: "tosokchon-samgyetang",
+    name: "Tosokchon Samgyetang",
+    koreanName: "토속촌 삼계탕",
+    cuisine: "Samgyetang (ginseng chicken soup)",
+    sourceShow: "Korean variety & travel shows",
+    region: "seoul",
+    area: "Near Gyeongbokgung, Jongno-gu",
+    address: "5 Jahamun-ro 5-gil, Jongno-gu, Seoul",
+    priceRange: "$$",
+    signature: ["Whole-bird ginseng chicken soup", "Ogol (black chicken) version"],
+    bookingMethod:
+      "No reservations; expect a 20–40 min queue at lunch. Weekday 2–5pm is the calm window.",
+    description:
+      "The hanok-courtyard samgyetang house beloved by presidents and film crews alike — restorative whole-chicken soup two minutes from Gyeongbokgung's west gate.",
+    tips: [
+      "Perfect post-palace lunch on a Bukchon/Gyeongbokgung day.",
+      "A shot of the complimentary insam-ju (ginseng liquor) into the soup is the local move.",
+    ],
+    mapQuery: "Tosokchon Samgyetang, Seoul",
+    themeColor: "forest",
+  },
+  {
+    slug: "eulji-myeonok",
+    name: "Eulji Myeonok",
+    koreanName: "을지면옥",
+    cuisine: "Pyongyang naengmyeon",
+    sourceShow: "K-drama & food-show staple",
+    region: "seoul",
+    area: "Euljiro, Jung-gu",
+    address: "Euljiro, Jung-gu, Seoul",
+    priceRange: "$$",
+    signature: ["Pyongyang-style cold buckwheat noodles", "Pyeonyuk (boiled beef slices)"],
+    bookingMethod:
+      "Walk-in only. The shop relocated during Euljiro's redevelopment — confirm the current address on Naver Map before heading over.",
+    description:
+      "One of Seoul's storied Pyongyang naengmyeon houses — the austere, broth-forward bowl that K-dramas reach for whenever a scene needs old-Seoul soul.",
+    tips: [
+      "First-timers: sip the broth before adding vinegar or mustard.",
+      "Order pyeonyuk to share — it is the connoisseur's pairing.",
+    ],
+    mapQuery: "Eulji Myeonok, Seoul",
+    themeColor: "mint",
+  },
+  {
+    slug: "haenyeo-kitchen",
+    name: "Haenyeo's Kitchen",
+    koreanName: "해녀의부엌",
+    cuisine: "Jeju seafood + dining theater",
+    sourceShow: "Global press & K-travel shows",
+    region: "jeju",
+    area: "Gujwa-eup, Jeju",
+    address: "Jongdal-ri, Gujwa-eup, Jeju-si, Jeju-do",
+    priceRange: "$$$",
+    signature: ["Haenyeo-harvested seafood course", "Performance telling real divers' stories"],
+    bookingMethod:
+      "Advance online booking essential (official site/Naver); seatings are show-format at fixed times and sell out days ahead.",
+    description:
+      "Part theater, part feast: Jeju's legendary women free-divers tell their own stories while you eat what they harvested. The island's most moving meal — and a natural pairing with any Jeju drama trail.",
+    tips: [
+      "Book the earliest seating and keep the afternoon for the nearby Jongdal-ri coast.",
+      "Performances mix Korean and English context; the emotion needs no translation.",
+    ],
+    mapQuery: "Haenyeo Kitchen, Jongdal-ri, Jeju",
+    themeColor: "ocean",
+  },
+  {
+    slug: "gwangjang-bindaetteok-alley",
+    name: "Gwangjang Market Food Alley",
+    koreanName: "광장시장 먹자골목",
+    cuisine: "Korean street food",
+    sourceShow: "Netflix Street Food & Culinary Class Wars culture",
+    region: "seoul",
+    area: "Jongno-gu, Seoul",
+    address: "88 Changgyeonggung-ro, Jongno-gu, Seoul",
+    priceRange: "$",
+    signature: ["Bindaetteok (mung-bean pancake)", "Mayak gimbap", "Yukhoe (beef tartare)"],
+    bookingMethod:
+      "No reservations — grab any bench seat that opens. Most stalls run cash-friendly, some take cards.",
+    description:
+      "The market arcade that starred in Netflix's Street Food and feeds every K-food craving in one lap — griddle smoke, clattering scissors, and the famous yukhoe alley at the center.",
+    tips: [
+      "Order one bindaetteok per two people — they are enormous.",
+      "Yukhoe alley shops are sit-down restaurants inside the market; queue moves quickly.",
+    ],
+    mapQuery: "Gwangjang Market, Seoul",
+    themeColor: "sunset",
+  },
+];
