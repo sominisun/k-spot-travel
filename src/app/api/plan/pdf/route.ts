@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { paymentsConfigured, verifyPassToken } from "@/lib/pass-token";
 
 export const runtime = "nodejs";
 
@@ -10,6 +11,7 @@ interface PdfPayload {
   days?: PdfDay[];
   deadlines?: { name: string; booking: string }[];
   email?: string;
+  passToken?: string;
 }
 
 const INDIGO = rgb(0.118, 0.227, 0.431);
@@ -120,6 +122,12 @@ export async function POST(request: NextRequest) {
     if (!payload.days?.length) throw new Error("no days");
   } catch {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  }
+
+  // Paid gate: once payments are configured, a valid signed pass token is
+  // required. In demo mode (no keys) the gate is open so the flow is testable.
+  if (paymentsConfigured() && !verifyPassToken(payload.passToken)) {
+    return NextResponse.json({ error: "Route Pass required" }, { status: 402 });
   }
 
   const pdf = await buildPdf(payload);

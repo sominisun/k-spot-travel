@@ -60,10 +60,18 @@ export function toggleStamp(spotSlug: string): boolean {
 
 // --- route pass -----------------------------------------------------------------
 
+const PASS_TOKEN_KEY = "ks2-pass-token";
+
 export function hasPass(): boolean {
   if (typeof window === "undefined") return false;
   return localStorage.getItem(PASS_KEY) === "1";
 }
-export function grantPass() {
+/** Store the server-issued pass token (demo mode passes "demo"). */
+export function grantPass(token = "demo") {
   localStorage.setItem(PASS_KEY, "1");
+  localStorage.setItem(PASS_TOKEN_KEY, token);
+}
+export function passToken(): string {
+  if (typeof window === "undefined") return "";
+  return localStorage.getItem(PASS_TOKEN_KEY) ?? "";
 }

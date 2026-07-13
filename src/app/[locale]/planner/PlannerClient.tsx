@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { l, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dict";
-import { grantPass, hasPass } from "@/lib/client-store";
+import { grantPass, hasPass, passToken } from "@/lib/client-store";
 import { PAYMENTS } from "@/lib/site";
 import { Icon } from "@/components/ui";
 import { LeafletMap, type MapMarker } from "@/components/LeafletMap";
@@ -98,8 +98,31 @@ export function PlannerClient({
   const [pass, setPass] = useState(false);
   const [email, setEmail] = useState("");
   const [mailState, setMailState] = useState<"idle" | "busy" | "sent" | "demo">("idle");
+  const [licenseKey, setLicenseKey] = useState("");
+  const [keyState, setKeyState] = useState<"idle" | "busy" | "invalid">("idle");
 
   useEffect(() => setPass(hasPass()), []);
+
+  const activateKey = async () => {
+    setKeyState("busy");
+    try {
+      const res = await fetch("/api/pass/activate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ licenseKey }),
+      });
+      const j = await res.json();
+      if (j.ok) {
+        grantPass(j.token);
+        setPass(true);
+        setKeyState("idle");
+      } else {
+        setKeyState("invalid");
+      }
+    } catch {
+      setKeyState("invalid");
+    }
+  };
 
   const filteredShows = useMemo(
     () => data.shows.filter((s) => s.title.toLowerCase().includes(query.toLowerCase())),
@@ -283,6 +306,7 @@ export function PlannerClient({
       locale,
       email: sendEmail ? email : undefined,
       title: "My K-SPOT Route",
+      passToken: passToken(),
       days: plan.map((d) => ({
         day: d.day, theme: d.theme,
         stops: d.stops.map((s) => ({ time: s.time, label: s.label, note: s.note })),
@@ -503,29 +527,53 @@ export function PlannerClient({
             </div>
 
             {!pass ? (
-              <div className="mt-4 flex flex-wrap items-center gap-3">
-                {PAYMENTS.passCheckoutUrl ? (
+              PAYMENTS.passCheckoutUrl ? (
+                <div className="mt-4 space-y-4">
                   <a
                     href={PAYMENTS.passCheckoutUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-[8px] bg-indigo px-5 py-2.5 text-sm font-bold text-white hover:bg-indigo-deep"
+                    className="inline-block rounded-[8px] bg-indigo px-5 py-2.5 text-sm font-bold text-white hover:bg-indigo-deep"
                   >
                     {t.unlock} →
                   </a>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() => { grantPass(); setPass(true); }}
-                      className="rounded-[8px] bg-indigo px-5 py-2.5 text-sm font-bold text-white hover:bg-indigo-deep"
-                    >
-                      {t.demoUnlock}
-                    </button>
-                    <p className="text-xs text-ink-faint">{t.demoNote}</p>
-                  </>
-                )}
-              </div>
+                  <div className="border-t border-line pt-4">
+                    <label className="text-sm font-semibold text-ink-soft">
+                      {t.haveKey}
+                    </label>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      <input
+                        value={licenseKey}
+                        onChange={(e) => { setLicenseKey(e.target.value); setKeyState("idle"); }}
+                        placeholder={t.licensePlaceholder}
+                        className="min-w-0 flex-1 rounded-[8px] border border-line px-3 py-2 text-sm outline-none focus:border-indigo"
+                      />
+                      <button
+                        type="button"
+                        onClick={activateKey}
+                        disabled={licenseKey.trim().length < 6 || keyState === "busy"}
+                        className="rounded-[8px] bg-indigo px-4 py-2 text-sm font-bold text-white hover:bg-indigo-deep disabled:opacity-50"
+                      >
+                        {t.activate}
+                      </button>
+                    </div>
+                    {keyState === "invalid" ? (
+                      <p className="mt-1.5 text-sm text-kred">{t.keyInvalid}</p>
+                    ) : null}
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => { grantPass(); setPass(true); }}
+                    className="rounded-[8px] bg-indigo px-5 py-2.5 text-sm font-bold text-white hover:bg-indigo-deep"
+                  >
+                    {t.demoUnlock}
+                  </button>
+                  <p className="text-xs text-ink-faint">{t.demoNote}</p>
+                </div>
+              )
             ) : (
               <div className="mt-5 space-y-5">
                 {/* Booking deadlines */}
