@@ -15,6 +15,7 @@ export function SourcedImage({
   className = "",
   fallbackTitle,
   fallbackNote,
+  captionLink = true,
 }: {
   slug: string;
   alt: string;
@@ -25,6 +26,8 @@ export function SourcedImage({
   /** Rendered in the quiet typographic block when no licensed photo exists yet */
   fallbackTitle?: string;
   fallbackNote?: string;
+  /** Render the source credit as a link. Must be false inside an <a> parent. */
+  captionLink?: boolean;
 }) {
   const img = imageOf(slug);
 
@@ -56,14 +59,20 @@ export function SourcedImage({
         />
       </div>
       <figcaption className="mt-1.5 text-[11px] leading-tight text-ink-faint">
-        <a
-          href={img.page}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-indigo"
-        >
-          {img.artist} · Wikimedia Commons · {img.license}
-        </a>
+        {captionLink ? (
+          <a
+            href={img.page}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-indigo"
+          >
+            {img.artist} · Wikimedia Commons · {img.license}
+          </a>
+        ) : (
+          <span>
+            {img.artist} · Wikimedia Commons · {img.license}
+          </span>
+        )}
       </figcaption>
     </figure>
   );

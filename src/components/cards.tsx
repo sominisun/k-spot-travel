@@ -27,6 +27,7 @@ export function ShowCard({
           alt={show.title}
           ratio="aspect-[3/2]"
           fallbackTitle={show.title}
+          captionLink={false}
         />
         <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
           {show.status === "trending" ? (
@@ -73,6 +74,7 @@ export function SpotCard({
           ratio="aspect-[16/10]"
           fallbackTitle={spot.name}
           fallbackNote={dict.common.noPhotoYet}
+          captionLink={false}
         />
         <div className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-ink-faint">
           <Icon name="pin" size={13} />
@@ -111,6 +113,7 @@ export function RouteCard({
           alt={route.title}
           ratio="aspect-[3/2]"
           fallbackTitle={route.title}
+          captionLink={false}
         />
         <div className="mt-2.5 flex items-center gap-2 text-xs font-semibold text-ink-faint">
           <Pill tone="indigo">
