@@ -26,17 +26,42 @@ export const PAYMENTS = {
 } as const;
 
 /**
- * Outbound partners. Replace with tracked affiliate deep links as programs are
- * approved (Klook 2–20%, Olive Young ≤13%, StyleKorean 12%, YesStyle 10%).
+ * Affiliate tracking. Each program's tracking query string is supplied via env
+ * (e.g. NEXT_PUBLIC_AFF_KLOOK="aid=12345&aff_adid=678"). Until a program is
+ * approved and its param set, links stay plain — identical to the old behavior.
+ * Commission ranges: Klook 2–20% (eSIM highest), Olive Young ≤13%,
+ * StyleKorean 12%, YesStyle 10%.
  */
+const AFF = {
+  klook: process.env.NEXT_PUBLIC_AFF_KLOOK ?? "",
+  trazy: process.env.NEXT_PUBLIC_AFF_TRAZY ?? "",
+  oliveYoung: process.env.NEXT_PUBLIC_AFF_OLIVEYOUNG ?? "",
+  styleKorean: process.env.NEXT_PUBLIC_AFF_STYLEKOREAN ?? "",
+  yesStyle: process.env.NEXT_PUBLIC_AFF_YESSTYLE ?? "",
+} as const;
+
+/** Append an affiliate tracking query string (from env) if configured. */
+function withAff(url: string, aff: string): string {
+  if (!aff) return url;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}${aff}`;
+}
+
 export const PARTNERS = {
   klookSearch: (q: string) =>
-    `https://www.klook.com/en-US/search/result/?query=${encodeURIComponent(q)}`,
+    withAff(
+      `https://www.klook.com/en-US/search/result/?query=${encodeURIComponent(q)}`,
+      AFF.klook,
+    ),
+  /** Klook eSIM category — the highest-commission (up to 20%) placement. */
+  klookEsim: () =>
+    withAff("https://www.klook.com/en-US/wifi-sim/", AFF.klook),
   trazySearch: (q: string) =>
-    `https://www.trazy.com/search?q=${encodeURIComponent(q)}`,
-  oliveYoungGlobal: "https://global.oliveyoung.com/",
-  styleKorean: "https://www.stylekorean.com/",
-  yesStyle: "https://www.yesstyle.com/",
+    withAff(`https://www.trazy.com/search?q=${encodeURIComponent(q)}`, AFF.trazy),
+  oliveYoungGlobal: withAff("https://global.oliveyoung.com/", AFF.oliveYoung),
+  styleKorean: withAff("https://www.stylekorean.com/", AFF.styleKorean),
+  yesStyle: withAff("https://www.yesstyle.com/", AFF.yesStyle),
+  // Not affiliate programs — a booking tool and two official tourism bodies.
   catchTable: "https://app.catchtable.co.kr/ct/en",
   visitKorea: "https://english.visitkorea.or.kr/",
   visitSeoul: "https://english.visitseoul.net/",
