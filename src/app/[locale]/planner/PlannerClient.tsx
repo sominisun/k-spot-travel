@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { l, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dict";
 import { grantPass, hasPass, passToken } from "@/lib/client-store";
+import { fmtClock, orderByProximity, round5, travelMinutes, type GeoPt } from "@/lib/route-order";
 import { PAYMENTS } from "@/lib/site";
 import { Icon } from "@/components/ui";
 import { LeafletMap, type MapMarker } from "@/components/LeafletMap";
@@ -75,10 +76,11 @@ function shuffle<T>(arr: T[], rnd: () => number): T[] {
   return a;
 }
 
+// spots/day, minutes spent at each spot, and the day's start time.
 const PACE = {
-  relaxed: { spots: 3, times: ["10:00", "12:30", "14:30", "16:30", "19:00"] },
-  standard: { spots: 4, times: ["09:30", "11:30", "12:45", "14:30", "16:30", "19:00"] },
-  packed: { spots: 5, times: ["08:30", "10:15", "12:00", "13:00", "14:45", "16:30", "18:00", "20:00"] },
+  relaxed: { spots: 3, dwell: 95, start: 10 * 60 },
+  standard: { spots: 4, dwell: 80, start: 9 * 60 + 30 },
+  packed: { spots: 5, dwell: 65, start: 8 * 60 + 30 },
 } as const;
 type Pace = keyof typeof PACE;
 
@@ -196,29 +198,54 @@ export function PlannerClient({
     for (const [region, slugs] of ordered) {
       if (remaining <= 0) break;
       const take = Math.min(Math.max(1, Math.round((slugs.length / total) * days)), remaining);
-      alloc.push({ region, slugs: shuffle(slugs, rnd), days: take });
+      // Chain the region's spots by proximity so consecutive stops (and
+      // consecutive days) are geographic neighbors. The seeded random start
+      // point is what makes "shuffle it differently" produce fresh-but-sane
+      // variations instead of zigzag routes.
+      const chained = orderByProximity(
+        slugs,
+        (s) => (spotMap.get(s)!.geo as GeoPt | null) ?? null,
+        Math.floor(rnd() * slugs.length),
+      );
+      alloc.push({ region, slugs: chained, days: take });
       remaining -= take;
     }
     if (remaining > 0 && alloc.length) alloc[0].days += remaining;
 
     const perDay = PACE[pace].spots;
-    const times = PACE[pace].times;
+    const dwell = PACE[pace].dwell;
     const result: PlanDay[] = [];
     let dayNum = 1;
     let beautyDone = false;
 
     for (const a of alloc) {
+      // Spread scarce spots evenly across the allocated days (e.g. 4 spots
+      // over 3 days -> 2/1/1) instead of front-loading and leaving days empty.
+      const baseN = Math.floor(a.slugs.length / a.days);
+      const extraN = a.slugs.length % a.days;
+      let offset = 0;
       for (let d = 0; d < a.days; d++) {
-        const daySlugs = a.slugs.slice(d * perDay, (d + 1) * perDay);
+        const takeN = Math.min(perDay, baseN + (d < extraN ? 1 : 0));
+        const daySlugs = a.slugs.slice(offset, offset + takeN);
+        offset += takeN;
         const stops: Stop[] = [];
-        let ti = 0;
-        const morning = daySlugs.slice(0, Math.ceil(perDay / 2));
-        const afternoon = daySlugs.slice(Math.ceil(perDay / 2));
+        const morning = daySlugs.slice(0, Math.ceil(daySlugs.length / 2));
+        const afternoon = daySlugs.slice(Math.ceil(daySlugs.length / 2));
 
-        for (const slug of morning) {
+        // Clock-driven schedule: each timestamp accumulates real dwell time
+        // plus a transit estimate to the next stop — no fixed template.
+        let clock = PACE[pace].start;
+        let prevGeo: GeoPt | null = null;
+        const pushSpot = (slug: string) => {
           const sp = spotMap.get(slug)!;
-          stops.push({ time: times[ti++] ?? "11:00", label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot", address: sp.address, howToGet: sp.howToGet });
-        }
+          const geo = (sp.geo as GeoPt | null) ?? null;
+          if (stops.length > 0) clock += travelMinutes(prevGeo, geo);
+          stops.push({ time: fmtClock(round5(clock)), label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot", address: sp.address, howToGet: sp.howToGet });
+          clock += dwell;
+          if (geo) prevGeo = geo;
+        };
+
+        for (const slug of morning) pushSpot(slug);
 
         // Lunch — prefer a restaurant tied to a selected show, in-region
         const regionRests = shuffle(
@@ -228,24 +255,24 @@ export function PlannerClient({
         const lunch =
           regionRests.find((r) => interests.includes("food") && shows.some((s) => r.sourceShow?.includes(s.title))) ??
           (interests.includes("food") ? regionRests[0] : undefined);
+        clock = Math.max(clock + 10, 12 * 60); // walk over; never lunch before noon
         stops.push(
           lunch
-            ? { time: times[ti++] ?? "12:30", label: `${lunch.name} (${lunch.priceRange})`, note: lunch.sourceShow ? `As seen around ${lunch.sourceShow}.` : "Editor-tracked table.", href: `/food/${lunch.slug}`, kind: "meal" }
-            : { time: times[ti++] ?? "12:30", label: "Lunch — local pick", note: "Follow the office crowds; the busiest place wins.", kind: "meal" },
+            ? { time: fmtClock(round5(clock)), label: `${lunch.name} (${lunch.priceRange})`, note: lunch.sourceShow ? `As seen around ${lunch.sourceShow}.` : "Editor-tracked table.", href: `/food/${lunch.slug}`, kind: "meal" }
+            : { time: fmtClock(round5(clock)), label: "Lunch — local pick", note: "Follow the office crowds; the busiest place wins.", kind: "meal" },
         );
+        clock += 70; // meal
 
-        for (const slug of afternoon) {
-          const sp = spotMap.get(slug)!;
-          stops.push({ time: times[ti++] ?? "16:00", label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot", address: sp.address, howToGet: sp.howToGet });
-        }
+        for (const slug of afternoon) pushSpot(slug);
 
+        const eveClock = fmtClock(round5(Math.max(clock + 20, 18 * 60 + 30)));
         if (interests.includes("beauty") && !beautyDone && a.region === "seoul") {
           beautyDone = true;
-          stops.push({ time: times[ti++] ?? "18:30", label: "Olive Young Myeongdong Town", note: "Flagship haul — passport for instant tax refund. Bring our shopping list.", href: "/beauty", kind: "evening" });
+          stops.push({ time: eveClock, label: "Olive Young Myeongdong Town", note: "Flagship haul — passport for instant tax refund. Bring our shopping list.", href: "/beauty", kind: "evening" });
         } else if (interests.includes("photo")) {
-          stops.push({ time: times[ti++] ?? "18:30", label: "Golden-hour photo return", note: "Revisit today's favorite spot at sunset — see our photo etiquette guide.", href: "/guide/filming-location-photo-etiquette", kind: "evening" });
+          stops.push({ time: eveClock, label: "Golden-hour photo return", note: "Revisit today's favorite spot at sunset — see our photo etiquette guide.", href: "/guide/filming-location-photo-etiquette", kind: "evening" });
         } else {
-          stops.push({ time: times[ti++] ?? "19:00", label: "Night market / riverside", note: "Street food and city lights — the standard drama epilogue.", kind: "evening" });
+          stops.push({ time: eveClock, label: "Night market / riverside", note: "Street food and city lights — the standard drama epilogue.", kind: "evening" });
         }
 
         const dayShows = shows.filter((sh) => sh.spots.some((sp) => daySlugs.includes(sp.slug)));
