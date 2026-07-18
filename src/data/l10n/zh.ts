@@ -3,6 +3,7 @@ import { zhShows, zhSpots } from "./zh-core";
 import { zhBeauty, zhRestaurants, zhRoutes } from "./zh-extra";
 import { zhArticlesPractical } from "./zh-articles-practical";
 import { zhArticlesCulture } from "./zh-articles-culture";
+import { zhArticlesExperiences } from "./zh-articles-experiences";
 
 export const zh: ContentOverlay = {
   shows: zhShows,
@@ -10,5 +11,5 @@ export const zh: ContentOverlay = {
   routes: zhRoutes,
   restaurants: zhRestaurants,
   beauty: zhBeauty,
-  articles: { ...zhArticlesPractical, ...zhArticlesCulture },
+  articles: { ...zhArticlesPractical, ...zhArticlesCulture, ...zhArticlesExperiences },
 };
