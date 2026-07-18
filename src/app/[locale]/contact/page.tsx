@@ -3,8 +3,9 @@ import Link from "next/link";
 import { l } from "@/i18n/config";
 import { getLegal } from "@/i18n/legal";
 import { localeParams, resolveLocale } from "@/lib/page-utils";
-import { COMMUNITY, SITE } from "@/lib/site";
+import { COMMUNITY } from "@/lib/site";
 import { Icon, SectionHeading } from "@/components/ui";
+import { ContactForm } from "@/components/ContactForm";
 
 export function generateStaticParams() {
   return localeParams();
@@ -30,12 +31,6 @@ export default async function ContactPage({
 
   const rows = [
     {
-      title: c.rows[0].title,
-      body: SITE.contactEmail,
-      href: `mailto:${SITE.contactEmail}`,
-      note: c.rows[0].note,
-    },
-    {
       title: c.rows[1].title,
       body: c.rows[1].body ?? "Discord",
       href: COMMUNITY.discordInvite || l(locale, "/community"),
@@ -52,6 +47,11 @@ export default async function ContactPage({
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
       <SectionHeading title={dict.legal.contactTitle} />
+      <div className="mt-6 rounded-[8px] border-2 border-indigo/25 p-5">
+        <h2 className="font-display text-lg font-bold">{dict.contactForm.title}</h2>
+        <p className="mt-1 mb-4 text-sm text-ink-soft">{dict.contactForm.sub}</p>
+        <ContactForm locale={locale} dict={dict} />
+      </div>
       <div className="mt-6 space-y-3">
         {rows.map((r) => (
           <div key={r.title} className="rounded-[8px] border border-line p-5">

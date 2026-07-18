@@ -80,7 +80,14 @@ export default async function PlannerPage({
     <div className="mx-auto max-w-4xl px-4 py-10">
       <SectionHeading title={dict.planner.title} />
       <p className="mt-2 max-w-2xl text-ink-soft">{dict.planner.sub}</p>
-      <PlannerClient locale={locale} dict={dict} data={data} initialShows={initialShows} initialDays={initialDays} />
+      <PlannerClient
+        locale={locale}
+        dict={dict}
+        data={data}
+        initialShows={initialShows}
+        initialDays={initialDays}
+        emailEnabled={Boolean(process.env.RESEND_API_KEY)}
+      />
     </div>
   );
 }

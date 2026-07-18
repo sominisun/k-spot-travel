@@ -120,7 +120,7 @@ export function QuizClient({
           onClick={() => setStep(0)}
           className="inline-flex items-center gap-2 rounded-[8px] bg-indigo px-6 py-3 font-bold text-white hover:bg-indigo-deep"
         >
-          <Icon name="sparkle" size={16} /> {t.start}
+          {t.start}
         </button>
       </div>
     );

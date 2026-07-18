@@ -3,6 +3,7 @@ import Link from "next/link";
 import { localeParams, resolveLocale } from "@/lib/page-utils";
 import { l } from "@/i18n/config";
 import { DROPS } from "@/data/drops";
+import { lDrop } from "@/data/drops-l10n";
 import { SectionHeading } from "@/components/ui";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { InsiderDrop } from "@/components/InsiderDrop";
@@ -48,7 +49,7 @@ export default async function DropsPage({
       </div>
 
       <div className="mt-10 space-y-10">
-        {DROPS.map((drop) =>
+        {DROPS.map(lDropRaw => lDrop(lDropRaw, locale)).map((drop) =>
           drop.insiderUntil && drop.insiderUntil > new Date().toISOString().slice(0, 10) ? (
             <InsiderDrop
               key={drop.slug}

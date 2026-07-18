@@ -133,7 +133,7 @@ export const spots: Spot[] = [
       "Subway Line 4 to Hyehwa Station, Exit 2, then a 15-min uphill walk through Ihwa Mural Village.",
     admission: "Free",
     tips: [
-      "Night visits are safe and stunning — the wall is lit after dark.",
+      "Go after dark — the wall is lit, the city spreads below, and the path stays safe and busy into the late evening.",
       "Approach through Ihwa Mural Village for a street-art bonus route.",
     ],
     mapQuery: "Naksan Park, Seoul",

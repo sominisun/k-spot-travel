@@ -90,12 +90,14 @@ export function PlannerClient({
   data,
   initialShows,
   initialDays,
+  emailEnabled = false,
 }: {
   locale: Locale;
   dict: Dict;
   data: PlannerData;
   initialShows?: string[];
   initialDays?: number;
+  emailEnabled?: boolean;
 }) {
   const t = dict.planner;
   const [selected, setSelected] = useState<string[]>(initialShows ?? []);
@@ -559,7 +561,7 @@ export function PlannerClient({
                 }}
                 className="inline-flex items-center gap-1.5 rounded-[8px] border border-line px-3.5 py-1.5 text-[13px] font-semibold hover:border-indigo"
               >
-                <Icon name="sparkle" size={14} /> {shared ? t.sharedPlan : t.sharePlan}
+                <Icon name="external" size={14} /> {shared ? t.sharedPlan : t.sharePlan}
               </button>
               <button type="button" onClick={() => navigator.clipboard.writeText(planText())} className="inline-flex items-center gap-1.5 rounded-[8px] border border-line px-3.5 py-1.5 text-[13px] font-semibold hover:border-indigo">
                 <Icon name="copy" size={14} /> {t.copyPlan}
@@ -724,24 +726,29 @@ export function PlannerClient({
                   >
                     <Icon name="download" size={15} /> {t.downloadPdf}
                   </button>
-                  <div className="flex flex-1 gap-2">
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder={t.emailPlaceholder}
-                      className="min-w-0 flex-1 rounded-[8px] border border-line px-3 py-2 text-sm outline-none focus:border-indigo"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => requestPdf(true)}
-                      disabled={!email.includes("@") || mailState === "busy"}
-                      className="inline-flex items-center gap-1.5 rounded-[8px] bg-indigo px-4 py-2 text-sm font-bold text-white hover:bg-indigo-deep disabled:opacity-50"
-                    >
-                      <Icon name="mail" size={15} /> {t.emailMe}
-                    </button>
-                  </div>
+                  {emailEnabled ? (
+                    <div className="flex flex-1 gap-2">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder={t.emailPlaceholder}
+                        className="min-w-0 flex-1 rounded-[8px] border border-line px-3 py-2 text-sm outline-none focus:border-indigo"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => requestPdf(true)}
+                        disabled={!email.includes("@") || mailState === "busy"}
+                        className="inline-flex items-center gap-1.5 rounded-[8px] bg-indigo px-4 py-2 text-sm font-bold text-white hover:bg-indigo-deep disabled:opacity-50"
+                      >
+                        <Icon name="mail" size={15} /> {t.emailMe}
+                      </button>
+                    </div>
+                  ) : null}
                 </div>
+                {!emailEnabled ? (
+                  <p className="text-xs text-ink-faint">{t.emailSoon}</p>
+                ) : null}
                 {mailState === "sent" ? (
                   <p className="text-sm font-bold text-celadon">{t.emailSent}</p>
                 ) : null}

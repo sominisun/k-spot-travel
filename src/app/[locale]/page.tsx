@@ -54,7 +54,6 @@ export default async function Home({
               href={l(locale, "/planner")}
               className="inline-flex items-center gap-2 rounded-[8px] bg-indigo px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-indigo-deep"
             >
-              <Icon name="sparkle" size={16} />
               {h.ctaPlanner}
             </Link>
             <Link
