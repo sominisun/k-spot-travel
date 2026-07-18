@@ -66,11 +66,21 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(out);
 }
 
+const CJK = /[぀-ヿ㐀-鿿가-힣]/;
+
 function matchFaq(query: string) {
   const ql = query.toLowerCase();
   let best: { score: number; entry: (typeof FAQ)[number] } | null = null;
   for (const entry of FAQ) {
-    const score = entry.keywords.filter((k) => ql.includes(k)).length;
+    let score = 0;
+    for (const k of entry.keywords) {
+      if (!ql.includes(k)) continue;
+      // Distinctive keywords count double so one specific token can trigger
+      // a match on its own: CJK tokens of 4+ chars (show titles like
+      // 오징어게임) and long Latin phrases (10+ chars, e.g. "cambio de
+      // divisas") are strong evidence; short generic tokens still need a pair.
+      score += (CJK.test(k) && k.length >= 4) || k.length >= 10 ? 2 : 1;
+    }
     if (score >= 2 && (!best || score > best.score)) best = { score, entry };
   }
   return best?.entry ?? null;
