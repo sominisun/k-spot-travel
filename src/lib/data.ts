@@ -20,6 +20,7 @@ import { routes as routeData } from "../data/routes";
 import { beautyGuides as beautyData } from "../data/beauty";
 import { articles as practicalArticles } from "../data/articles-practical";
 import { articles as cultureArticles } from "../data/articles-culture";
+import { articles as experienceArticles } from "../data/articles-experiences";
 import { IMAGES, type SpotImage } from "../data/images";
 import { GEO } from "../data/geo";
 
@@ -127,9 +128,11 @@ export function restaurantsInRegion(region: string): Restaurant[] {
 
 // --- articles --------------------------------------------------------------------
 
-export const allArticles: Article[] = [...practicalArticles, ...cultureArticles].sort(
-  (a, b) => (a.updated < b.updated ? 1 : -1),
-);
+export const allArticles: Article[] = [
+  ...practicalArticles,
+  ...cultureArticles,
+  ...experienceArticles,
+].sort((a, b) => (a.updated < b.updated ? 1 : -1));
 
 export function getArticle(slug: string): Article | undefined {
   return allArticles.find((a) => a.slug === slug);
