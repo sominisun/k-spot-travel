@@ -185,6 +185,8 @@ export const zh: Dict = {
     keyInvalid: "授权码无效。请核对购买确认邮件中的授权码。",
     shareDiscord: "到 Discord 获取行程反馈",
     lockedHint: "已锁定 — 通行证专享",
+    startDate: "出行日期（可选）",
+    teaserNote: "第 1 天展示的就是路线通行证的完整详情。在下方解锁全部行程的时间、场景笔记与订位日历。",
   },
   quiz: {
     title: "你的下一站是哪个 K-世界？",

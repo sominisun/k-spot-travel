@@ -37,6 +37,8 @@ export default async function PlannerPage({
         area: spot.area,
         scene: sceneNote,
         geo: geoOf(spot.slug) ?? null,
+        address: spot.address,
+        howToGet: spot.howToGet,
       })),
     })),
     restaurants: allRestaurants

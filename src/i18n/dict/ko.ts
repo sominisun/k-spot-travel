@@ -187,6 +187,8 @@ export const ko: Dict = {
     keyInvalid: "유효하지 않은 키입니다. 구매 확인 메일의 라이선스 키를 확인하세요.",
     shareDiscord: "디스코드에서 일정 피드백 받기",
     lockedHint: "잠김 — 루트 패스 콘텐츠",
+    startDate: "여행 시작일 (선택)",
+    teaserNote: "1일차는 루트 패스의 상세 수준 그대로 보여드립니다. 아래에서 전체 일정의 시간·장면 노트·예약 캘린더를 잠금 해제하세요.",
   },
   quiz: {
     title: "내 다음 여행지는 어느 K-세계?",

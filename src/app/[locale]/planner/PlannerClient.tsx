@@ -21,6 +21,8 @@ export interface PlannerData {
       area: string;
       scene: string;
       geo: { lat: number; lng: number; approx?: boolean } | null;
+      address?: string;
+      howToGet?: string;
     }[];
   }[];
   restaurants: {
@@ -40,6 +42,8 @@ interface Stop {
   href?: string;
   geo?: { lat: number; lng: number; approx?: boolean } | null;
   kind: "spot" | "meal" | "evening";
+  address?: string;
+  howToGet?: string;
 }
 interface PlanDay {
   day: number;
@@ -100,6 +104,18 @@ export function PlannerClient({
   const [mailState, setMailState] = useState<"idle" | "busy" | "sent" | "demo">("idle");
   const [licenseKey, setLicenseKey] = useState("");
   const [keyState, setKeyState] = useState<"idle" | "busy" | "invalid">("idle");
+  const [startDate, setStartDate] = useState("");
+
+  /** Trip start: user-picked date, else 2 weeks out (planning default). */
+  const tripStart = () => {
+    if (startDate) {
+      const d = new Date(startDate + "T09:00:00");
+      if (!Number.isNaN(d.getTime())) return d;
+    }
+    const d = new Date();
+    d.setDate(d.getDate() + 14);
+    return d;
+  };
 
   useEffect(() => setPass(hasPass()), []);
 
@@ -144,7 +160,7 @@ export function PlannerClient({
     // Unique spots with merged scene notes
     const spotMap = new Map<
       string,
-      { name: string; region: string; area: string; notes: string[]; href: string; geo: Stop["geo"] }
+      { name: string; region: string; area: string; notes: string[]; href: string; geo: Stop["geo"]; address?: string; howToGet?: string }
     >();
     for (const show of shows) {
       for (const sp of show.spots) {
@@ -155,6 +171,7 @@ export function PlannerClient({
           spotMap.set(sp.slug, {
             name: sp.name, region: sp.region, area: sp.area,
             notes: [note], href: `/spots/${sp.slug}`, geo: sp.geo,
+            address: sp.address, howToGet: sp.howToGet,
           });
       }
     }
@@ -195,7 +212,7 @@ export function PlannerClient({
 
         for (const slug of morning) {
           const sp = spotMap.get(slug)!;
-          stops.push({ time: times[ti++] ?? "11:00", label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot" });
+          stops.push({ time: times[ti++] ?? "11:00", label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot", address: sp.address, howToGet: sp.howToGet });
         }
 
         // Lunch — prefer a restaurant tied to a selected show, in-region
@@ -214,7 +231,7 @@ export function PlannerClient({
 
         for (const slug of afternoon) {
           const sp = spotMap.get(slug)!;
-          stops.push({ time: times[ti++] ?? "16:00", label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot" });
+          stops.push({ time: times[ti++] ?? "16:00", label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot", address: sp.address, howToGet: sp.howToGet });
         }
 
         if (interests.includes("beauty") && !beautyDone && a.region === "seoul") {
@@ -240,6 +257,7 @@ export function PlannerClient({
 
   // --- exports -----------------------------------------------------------
 
+  // Free tier: Day 1 in full detail as the teaser; later days list stops only.
   const planText = () =>
     !plan
       ? ""
@@ -247,7 +265,11 @@ export function PlannerClient({
           "My K-SPOT Travel plan", "",
           ...plan.flatMap((d) => [
             `DAY ${d.day} — ${d.theme}`,
-            ...d.stops.map((s) => `  ${s.time}  ${s.label} — ${s.note}`),
+            ...d.stops.map((s) =>
+              pass || d.day === 1
+                ? `  ${s.time}  ${s.label} — ${s.note}`
+                : `  · ${s.label}`,
+            ),
             "",
           ]),
           "Built with K-SPOT Travel — your K-content is your Korea travel map.",
@@ -269,10 +291,13 @@ export function PlannerClient({
     return out;
   }, [plan, data.restaurants]);
 
+  // Route Pass export: itinerary events on the real trip dates PLUS booking
+  // reminder events (D-30 reservation windows, D-7 reconfirm sweep).
   const downloadIcs = () => {
     if (!plan) return;
-    const start = new Date();
-    start.setDate(start.getDate() + 14); // placeholder trip start: 2 weeks out
+    const start = tripStart();
+    const stamp = (dt: Date) => dt.toISOString().replace(/[-:]/g, "").slice(0, 15);
+    const esc = (s: string) => s.replace(/,/g, "\\,");
     const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//K-SPOT Travel//EN"];
     plan.forEach((d) => {
       d.stops.forEach((s) => {
@@ -280,16 +305,33 @@ export function PlannerClient({
         dt.setDate(start.getDate() + d.day - 1);
         const [h, m] = s.time.split(":").map(Number);
         dt.setHours(h ?? 10, m ?? 0, 0);
-        const stamp = dt.toISOString().replace(/[-:]/g, "").slice(0, 15);
         lines.push(
           "BEGIN:VEVENT",
-          `DTSTART:${stamp}`,
-          `SUMMARY:${s.label.replace(/,/g, "\\,")}`,
-          `DESCRIPTION:${s.note.replace(/,/g, "\\,")}`,
+          `DTSTART:${stamp(dt)}`,
+          `SUMMARY:${esc(s.label)}`,
+          `DESCRIPTION:${esc(s.note)}`,
           "END:VEVENT",
         );
       });
     });
+    // Booking-ops reminders
+    const addReminder = (daysBefore: number, summary: string, desc: string) => {
+      const dt = new Date(start);
+      dt.setDate(start.getDate() - daysBefore);
+      if (dt.getTime() < Date.now()) return; // window already passed
+      dt.setHours(9, 0, 0);
+      lines.push(
+        "BEGIN:VEVENT",
+        `DTSTART:${stamp(dt)}`,
+        `SUMMARY:${esc(summary)}`,
+        `DESCRIPTION:${esc(desc)}`,
+        "END:VEVENT",
+      );
+    };
+    for (const dl of deadlines) {
+      addReminder(30, `Booking window opens: ${dl.name}`, dl.booking);
+    }
+    addReminder(7, "K-SPOT trip check: reconfirm bookings", "Reconfirm restaurant reservations, check spot hours and the weather forecast.");
     lines.push("END:VCALENDAR");
     const blob = new Blob([lines.join("\r\n")], { type: "text/calendar" });
     const a = document.createElement("a");
@@ -307,9 +349,15 @@ export function PlannerClient({
       email: sendEmail ? email : undefined,
       title: "My K-SPOT Route",
       passToken: passToken(),
+      startDate: tripStart().toISOString().slice(0, 10),
+      shows: data.shows.filter((s) => selected.includes(s.slug)).map((s) => s.title),
+      pace,
       days: plan.map((d) => ({
         day: d.day, theme: d.theme,
-        stops: d.stops.map((s) => ({ time: s.time, label: s.label, note: s.note })),
+        stops: d.stops.map((s) => ({
+          time: s.time, label: s.label, note: s.note, kind: s.kind,
+          address: s.address, howToGet: s.howToGet,
+        })),
       })),
       deadlines,
     };
@@ -397,6 +445,15 @@ export function PlannerClient({
               {days}
             </span>
           </div>
+          <label className="mt-3 block text-xs font-semibold text-ink-soft">
+            {t.startDate}
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="mt-1 w-full rounded-[8px] border border-line px-2.5 py-1.5 text-sm outline-none focus:border-indigo"
+            />
+          </label>
         </div>
         <div className="rounded-[8px] border border-line p-5">
           <h2 className="font-bold">3. {t.step3}</h2>
@@ -464,39 +521,60 @@ export function PlannerClient({
               <button type="button" onClick={() => navigator.clipboard.writeText(planText())} className="inline-flex items-center gap-1.5 rounded-[8px] border border-line px-3.5 py-1.5 text-[13px] font-semibold hover:border-indigo">
                 <Icon name="copy" size={14} /> {t.copyPlan}
               </button>
-              <button type="button" onClick={downloadIcs} className="inline-flex items-center gap-1.5 rounded-[8px] border border-line px-3.5 py-1.5 text-[13px] font-semibold hover:border-indigo">
-                <Icon name="calendar" size={14} /> {t.downloadIcs}
-              </button>
+              {pass ? (
+                <button type="button" onClick={downloadIcs} className="inline-flex items-center gap-1.5 rounded-[8px] border border-line px-3.5 py-1.5 text-[13px] font-semibold hover:border-indigo">
+                  <Icon name="calendar" size={14} /> {t.downloadIcs}
+                </button>
+              ) : null}
             </div>
           </div>
 
           <div className="mt-5 space-y-5">
-            {plan.map((day) => (
-              <section key={day.day} className="rounded-[8px] border border-line p-5">
-                <h3 className="font-display text-lg font-bold">
-                  <span className="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-[8px] bg-indigo text-sm text-white">
-                    {day.day}
-                  </span>
-                  {day.theme}
-                </h3>
-                <ol className="mt-4 space-y-3 border-l border-line pl-4">
-                  {day.stops.map((stop, i) => (
-                    <li key={i} className="relative">
-                      <span className="absolute top-1.5 -left-[21px] h-2 w-2 rounded-full border-2 border-paper bg-indigo" />
-                      <p className="text-[11px] font-bold tracking-wide text-ink-faint uppercase">{stop.time}</p>
-                      {stop.href ? (
-                        <Link href={l(locale, stop.href)} className="font-bold hover:text-indigo">
-                          {stop.label} →
-                        </Link>
-                      ) : (
-                        <p className="font-bold">{stop.label}</p>
-                      )}
-                      <p className="text-sm text-ink-soft">{stop.note}</p>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            ))}
+            {plan.map((day) => {
+              // Teaser paywall: Day 1 shows the full Route Pass detail level;
+              // later days list the stops but hold timings & notes.
+              const detailed = pass || day.day === 1;
+              return (
+                <section key={day.day} className="rounded-[8px] border border-line p-5">
+                  <h3 className="flex items-center justify-between font-display text-lg font-bold">
+                    <span>
+                      <span className="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-[8px] bg-indigo text-sm text-white">
+                        {day.day}
+                      </span>
+                      {day.theme}
+                    </span>
+                    {!detailed ? (
+                      <a href="#pass" className="inline-flex items-center gap-1 text-xs font-bold text-indigo hover:underline">
+                        <Icon name="lock" size={13} /> {t.lockedHint}
+                      </a>
+                    ) : null}
+                  </h3>
+                  <ol className="mt-4 space-y-3 border-l border-line pl-4">
+                    {day.stops.map((stop, i) => (
+                      <li key={i} className="relative">
+                        <span className="absolute top-1.5 -left-[21px] h-2 w-2 rounded-full border-2 border-paper bg-indigo" />
+                        {detailed ? (
+                          <p className="text-[11px] font-bold tracking-wide text-ink-faint uppercase">{stop.time}</p>
+                        ) : null}
+                        {stop.href ? (
+                          <Link href={l(locale, stop.href)} className="font-bold hover:text-indigo">
+                            {stop.label} →
+                          </Link>
+                        ) : (
+                          <p className="font-bold">{stop.label}</p>
+                        )}
+                        {detailed ? (
+                          <p className="text-sm text-ink-soft">{stop.note}</p>
+                        ) : null}
+                      </li>
+                    ))}
+                  </ol>
+                  {day.day === 1 && !pass ? (
+                    <p className="mt-3 border-t border-line pt-3 text-xs text-ink-faint">{t.teaserNote}</p>
+                  ) : null}
+                </section>
+              );
+            })}
           </div>
 
           {mapMarkers.length > 1 ? (

@@ -187,6 +187,8 @@ export const es: Dict = {
     keyInvalid: "Esa clave no es válida. Revisa la clave de licencia en tu email de confirmación.",
     shareDiscord: "Pide feedback de este plan en Discord",
     lockedHint: "Bloqueado — contenido del Route Pass",
+    startDate: "Fecha de inicio del viaje (opcional)",
+    teaserNote: "El día 1 muestra el nivel de detalle completo del Route Pass. Desbloquea todos los días — horarios, notas de escenas y calendario de reservas — abajo.",
   },
   quiz: {
     title: "¿Qué K-mundo es tu próximo viaje?",

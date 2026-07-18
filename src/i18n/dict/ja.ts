@@ -187,6 +187,8 @@ export const ja: Dict = {
     keyInvalid: "無効なキーです。購入確認メールのライセンスキーをご確認ください。",
     shareDiscord: "Discordでプランのフィードバックをもらう",
     lockedHint: "ロック中 — ルートパス限定",
+    startDate: "旅行開始日（任意）",
+    teaserNote: "DAY 1はルートパスの詳細レベルをそのまま公開中。全日程の時間・シーンノート・予約カレンダーは下で解除できます。",
   },
   quiz: {
     title: "次の旅はどのK-ワールド？",

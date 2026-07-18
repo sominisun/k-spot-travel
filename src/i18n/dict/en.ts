@@ -185,6 +185,8 @@ export const en = {
     keyInvalid: "That key isn't valid. Check the license key in your purchase confirmation email.",
     shareDiscord: "Get feedback on this plan in Discord",
     lockedHint: "Locked — Route Pass content",
+    startDate: "Trip start date (optional)",
+    teaserNote: "Day 1 shows the full Route Pass detail. Unlock every day — timings, scene notes and the booking calendar — below.",
   },
   quiz: {
     title: "Which K-world is your next trip?",
