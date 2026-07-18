@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { appendFile, mkdir } from "node:fs/promises";
-import path from "node:path";
+import { notifyOperator } from "@/lib/notify";
 
 export const runtime = "nodejs";
 
@@ -39,28 +38,12 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  try {
-    const dir = path.join(process.cwd(), ".chatlog");
-    await mkdir(dir, { recursive: true });
-    await appendFile(
-      path.join(dir, "newsletter.jsonl"),
-      JSON.stringify({ ts: new Date().toISOString(), email, locale }) + "\n",
-      "utf8",
-    );
-  } catch {
-    /* best-effort */
-  }
-  const webhook = process.env.DISCORD_WEBHOOK_URL;
-  if (webhook) {
-    try {
-      await fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: `**[newsletter]** ${email} (${locale})` }),
-      });
-    } catch {
-      /* best-effort */
-    }
-  }
+  await notifyOperator({
+    kind: "newsletter",
+    subject: `[K-SPOT newsletter] signup: ${email}`,
+    text: `Newsletter signup: ${email} (${locale}) — add to the Resend audience.`,
+    logFile: "newsletter.jsonl",
+    logEntry: { email, locale },
+  });
   return NextResponse.json({ ok: true, queued: true });
 }
