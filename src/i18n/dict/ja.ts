@@ -293,6 +293,22 @@ export const ja: Dict = {
     insiderDesc: "詳細プラン無制限、新作ガイド1週間先行、Insiderニュースレター、Discordロール。",
     refund: "デジタル商品 — PDF発行に未使用のパスは14日以内に返金します。",
   },
+  newsletter: {
+    title: "The K Edit Weekly",
+    sub: "週1回のドロップ：新しく検証したロケ地、いまのソウル、今月のファンフレーム。スパムなし、いつでも解除。",
+    placeholder: "you@example.com",
+    cta: "購読する",
+    done: "登録完了 — 金曜日にお届けします。",
+    error: "失敗しました — アドレスをご確認ください。",
+  },
+  drops: {
+    title: "ウィークリードロップ",
+    sub: "週に1本：新しく検証したロケ地、再確認した情報、実地検証プレイブック。Insiderが最初に読めます。",
+    insiderNote: "Insider会員は各ドロップを7日早くメールで受け取れます。",
+    tagNew: "新スポット",
+    tagReverified: "再検証",
+    tagPlaybook: "プレイブック",
+  },
   footer: {
     tagline: "あなたが観たKコンテンツが、韓国旅行の地図になる。",
     explore: "探す",
@@ -302,6 +318,7 @@ export const ja: Dict = {
     contact: "お問い合わせ",
     privacy: "プライバシーポリシー",
     terms: "利用規約",
+    drops: "ウィークリードロップ",
     disclaimer:
       "K-SPOT Travelは独立したファンメイドの旅行ガイドです。Netflix・Disney+・Apple TV+および制作会社とは無関係で、作品名は識別目的でのみ使用し、著作権のある映像・スチールは使用しません。",
     affiliate:

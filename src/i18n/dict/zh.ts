@@ -291,6 +291,22 @@ export const zh: Dict = {
     insiderDesc: "无限详细行程、新作攻略提前一周、Insider 通讯与 Discord 身份组。",
     refund: "数字商品 — 未用于生成 PDF 的通行证 14 天内可退款。",
   },
+  newsletter: {
+    title: "The K Edit Weekly",
+    sub: "每周一期：新核实的取景地、首尔当下、本月粉丝之框。不发垃圾邮件，随时退订。",
+    placeholder: "you@example.com",
+    cta: "订阅",
+    done: "订阅成功 — 周五见。",
+    error: "没有成功 — 请检查邮箱地址。",
+  },
+  drops: {
+    title: "每周速递",
+    sub: "每周一篇：新核实的取景地、复核情报与实测攻略。Insider 会员最先阅读。",
+    insiderNote: "Insider 会员提前 7 天在邮箱收到每期速递。",
+    tagNew: "新取景地",
+    tagReverified: "重新核实",
+    tagPlaybook: "实战攻略",
+  },
   footer: {
     tagline: "你看过的 K-内容，就是你的韩国旅行地图。",
     explore: "探索",
@@ -300,6 +316,7 @@ export const zh: Dict = {
     contact: "联系我们",
     privacy: "隐私政策",
     terms: "使用条款",
+    drops: "每周速递",
     disclaimer:
       "K-SPOT Travel 是独立的粉丝自制旅行指南，与 Netflix、Disney+、Apple TV+ 及任何制作公司无关。作品名称仅用于识别，不使用任何受版权保护的影像或剧照。",
     affiliate: "部分外链为联盟链接 — 通过它们预订不会增加你的费用，但可能为本站带来佣金。",

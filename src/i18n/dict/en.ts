@@ -292,6 +292,22 @@ export const en = {
       "Unlimited detailed plans, new-drop guides a week early, the Insider newsletter and a Discord role.",
     refund: "Digital goods — 14-day refund if the pass hasn't been used for a delivered PDF.",
   },
+  newsletter: {
+    title: "The K Edit Weekly",
+    sub: "One weekly drop: new verified spots, whats on in Seoul, and the months Fan Frame. No spam, unsubscribe anytime.",
+    placeholder: "you@example.com",
+    cta: "Subscribe",
+    done: "Youre in — see you Friday.",
+    error: "That didnt work — check the address.",
+  },
+  drops: {
+    title: "The Weekly Drop",
+    sub: "One dispatch a week: newly verified filming locations, re-checked intel and field-tested playbooks. Insiders read them first.",
+    insiderNote: "Insider members get each drop 7 days early, straight to their inbox.",
+    tagNew: "New spots",
+    tagReverified: "Re-verified",
+    tagPlaybook: "Playbook",
+  },
   footer: {
     tagline: "Your K-content is your Korea travel map.",
     explore: "Explore",
@@ -301,6 +317,7 @@ export const en = {
     contact: "Contact",
     privacy: "Privacy policy",
     terms: "Terms of use",
+    drops: "Weekly Drop",
     disclaimer:
       "K-SPOT Travel is an independent fan-made travel guide. Not affiliated with Netflix, Disney+, Apple TV+ or any production company. Titles referenced for identification only; no copyrighted footage or stills are used.",
     affiliate:

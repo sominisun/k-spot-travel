@@ -2,6 +2,7 @@ import Link from "next/link";
 import { l, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dict";
 import { PARTNERS, SITE } from "@/lib/site";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
   const f = dict.footer;
@@ -23,6 +24,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
         { href: l(locale, "/routes"), label: dict.nav.routes },
         { href: l(locale, "/map"), label: dict.nav.map },
         { href: l(locale, "/quiz"), label: dict.nav.quiz },
+        { href: l(locale, "/drops"), label: dict.footer.drops },
         { href: l(locale, "/community"), label: dict.nav.community },
       ],
     },
@@ -48,6 +50,15 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
             </span>
           </p>
           <p className="mt-2 max-w-sm text-sm text-ink-soft">{f.tagline}</p>
+          <div className="mt-4 max-w-sm">
+            <p className="text-[11px] font-bold tracking-[0.18em] text-ink-faint uppercase">
+              {dict.newsletter.title}
+            </p>
+            <p className="mt-1 text-xs text-ink-soft">{dict.newsletter.sub}</p>
+            <div className="mt-2">
+              <NewsletterForm locale={locale} dict={dict} compact />
+            </div>
+          </div>
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-ink-faint">
             {f.disclaimer}
           </p>

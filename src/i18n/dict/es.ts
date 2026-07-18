@@ -294,6 +294,22 @@ export const es: Dict = {
       "Planes detallados ilimitados, guías de estrenos una semana antes, newsletter Insider y rol de Discord.",
     refund: "Producto digital — reembolso en 14 días si el pass no se usó para generar un PDF.",
   },
+  newsletter: {
+    title: "The K Edit Weekly",
+    sub: "Un drop semanal: nuevas localizaciones verificadas, qué pasa en Seúl y el Fan Frame del mes. Sin spam, cancela cuando quieras.",
+    placeholder: "you@example.com",
+    cta: "Suscribirme",
+    done: "¡Dentro! Nos vemos el viernes.",
+    error: "No funcionó — revisa la dirección.",
+  },
+  drops: {
+    title: "El Drop Semanal",
+    sub: "Una entrega por semana: localizaciones recién verificadas, datos re-comprobados y playbooks probados. Los Insiders lo leen primero.",
+    insiderNote: "Los miembros Insider reciben cada drop 7 días antes en su correo.",
+    tagNew: "Nuevos lugares",
+    tagReverified: "Re-verificado",
+    tagPlaybook: "Playbook",
+  },
   footer: {
     tagline: "El K-content que viste es tu mapa de viaje por Corea.",
     explore: "Explorar",
@@ -303,6 +319,7 @@ export const es: Dict = {
     contact: "Contacto",
     privacy: "Política de privacidad",
     terms: "Términos de uso",
+    drops: "Drop semanal",
     disclaimer:
       "K-SPOT Travel es una guía de viaje independiente hecha por fans. Sin afiliación con Netflix, Disney+, Apple TV+ ni productoras. Los títulos se citan solo para identificación; no se usan imágenes con copyright.",
     affiliate:
