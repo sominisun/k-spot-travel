@@ -19,6 +19,7 @@ import {
   typeLabel,
 } from "@/lib/localize";
 import { googleMapsUrl, naverMapUrl, PARTNERS, SITE } from "@/lib/site";
+import { sceneGuide } from "@/data/scene-guides";
 import { SourcedImage } from "@/components/SourcedImage";
 import { LeafletMap } from "@/components/LeafletMap";
 import { StampButton } from "@/components/StampButton";
@@ -114,17 +115,37 @@ export default async function SpotPage({
       <section className="mt-8">
         <h2 className="font-display text-xl font-bold">{dict.common.appearsIn}</h2>
         <div className="mt-3 space-y-3">
-          {shows.map(({ show, sceneNote }) => (
-            <div key={show.slug} className="rounded-[8px] border border-line p-4">
-              <Link
-                href={l(locale, `/shows/${show.slug}`)}
-                className="font-display font-bold hover:text-indigo"
-              >
-                {show.title} →
-              </Link>
-              <p className="mt-1 text-sm text-ink-soft italic">“{sceneNote}”</p>
-            </div>
-          ))}
+          {shows.map(({ show, sceneNote }) => {
+            const guide = sceneGuide(show.slug, spot.slug);
+            return (
+              <div key={show.slug} className="rounded-[8px] border border-line p-4">
+                <Link
+                  href={l(locale, `/shows/${show.slug}`)}
+                  className="font-display font-bold hover:text-indigo"
+                >
+                  {show.title} →
+                </Link>
+                {guide?.episode ? (
+                  <span className="ml-2 rounded-[4px] border border-celadon px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-celadon uppercase">
+                    {guide.episode}
+                  </span>
+                ) : null}
+                <p className="mt-1 text-sm text-ink-soft italic">“{sceneNote}”</p>
+                {guide?.shotTip ? (
+                  <p className="mt-2.5 text-sm leading-relaxed text-ink-soft">
+                    <span className="font-bold text-indigo">{dict.common.shotTip}: </span>
+                    {guide.shotTip}
+                  </p>
+                ) : null}
+                {guide?.nowNote ? (
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                    <span className="font-bold text-celadon">{dict.common.nowNote}: </span>
+                    {guide.nowNote}
+                  </p>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       </section>
 

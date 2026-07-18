@@ -41,6 +41,8 @@ export const ko: Dict = {
     noPhotoYet: "아직 사진이 없어요 — 디스코드에 여러분의 사진을 올려주시면 크레딧과 함께 실립니다.",
     appearsIn: "등장 작품",
     sceneNote: "그 장면",
+    shotTip: "그 장면 그대로 찍기",
+    nowNote: "지금의 모습",
     howToGet: "가는 법",
     address: "주소",
     hours: "운영시간",

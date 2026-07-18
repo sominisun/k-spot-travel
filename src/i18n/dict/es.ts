@@ -41,6 +41,8 @@ export const es: Dict = {
     noPhotoYet: "Aún sin foto — comparte la tuya en Discord y aparecerá aquí con crédito.",
     appearsIn: "Aparece en",
     sceneNote: "La escena",
+    shotTip: "Recrea la escena",
+    nowNote: "Cómo está ahora",
     howToGet: "Cómo llegar",
     address: "Dirección",
     hours: "Horario",

@@ -39,6 +39,8 @@ export const en = {
     noPhotoYet: "No photo yet — share yours in our Discord and get credited here.",
     appearsIn: "Appears in",
     sceneNote: "The scene",
+    shotTip: "Recreate the shot",
+    nowNote: "There now",
     howToGet: "Getting there",
     address: "Address",
     hours: "Hours",

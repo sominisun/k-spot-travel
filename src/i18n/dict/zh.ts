@@ -41,6 +41,8 @@ export const zh: Dict = {
     noPhotoYet: "暂无照片 — 在 Discord 分享你的照片，我们将署名刊登。",
     appearsIn: "出现于",
     sceneNote: "那个场景",
+    shotTip: "复刻同款镜头",
+    nowNote: "现场近况",
     howToGet: "交通方式",
     address: "地址",
     hours: "营业时间",

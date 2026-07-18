@@ -41,6 +41,8 @@ export const ja: Dict = {
     noPhotoYet: "まだ写真がありません — Discordに投稿いただければクレジット付きで掲載します。",
     appearsIn: "登場作品",
     sceneNote: "あのシーン",
+    shotTip: "あのシーンを再現",
+    nowNote: "現地のいま",
     howToGet: "アクセス",
     address: "住所",
     hours: "営業時間",
