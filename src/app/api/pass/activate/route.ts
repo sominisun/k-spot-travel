@@ -23,10 +23,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "bad-request" }, { status: 400 });
   }
 
-  const valid = await validateLicenseKey(licenseKey);
+  const { valid, productId } = await validateLicenseKey(licenseKey);
   if (!valid) {
     return NextResponse.json({ ok: false, error: "invalid-key" }, { status: 402 });
   }
 
-  return NextResponse.json({ ok: true, token: issuePassToken() });
+  // Insider memberships are recognized by their Lemon Squeezy product id.
+  const insiderId = Number(process.env.LEMONSQUEEZY_INSIDER_PRODUCT_ID);
+  const tier = insiderId && productId === insiderId ? "insider" : "pass";
+  return NextResponse.json({ ok: true, token: issuePassToken(tier), tier });
 }

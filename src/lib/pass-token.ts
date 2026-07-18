@@ -17,12 +17,14 @@ export function paymentsConfigured(): boolean {
   return Boolean(SECRET && process.env.LEMONSQUEEZY_API_KEY);
 }
 
+export type PassTier = "pass" | "insider";
+
 /** Issue a signed pass token. Returns "" if no secret is configured. */
-export function issuePassToken(): string {
+export function issuePassToken(tier: PassTier = "pass"): string {
   if (!SECRET) return "";
   const exp = Math.floor(Date.now() / 1000) + TTL_DAYS * 86400;
   const nonce = crypto.randomBytes(6).toString("hex");
-  const body = `${exp}.${nonce}`;
+  const body = `${exp}.${tier}.${nonce}`;
   const sig = crypto.createHmac("sha256", SECRET).update(body).digest();
   return `${body}.${b64url(sig)}`;
 }
@@ -31,9 +33,11 @@ export function issuePassToken(): string {
 export function verifyPassToken(token: string | null | undefined): boolean {
   if (!SECRET || !token) return false;
   const parts = token.split(".");
-  if (parts.length !== 3) return false;
-  const [expStr, nonce, sig] = parts;
-  const body = `${expStr}.${nonce}`;
+  // 4 parts = exp.tier.nonce.sig; 3 parts = legacy exp.nonce.sig (tier=pass)
+  if (parts.length !== 3 && parts.length !== 4) return false;
+  const sig = parts[parts.length - 1];
+  const body = parts.slice(0, -1).join(".");
+  const expStr = parts[0];
   const expected = b64url(
     crypto.createHmac("sha256", SECRET).update(body).digest(),
   );
@@ -46,13 +50,16 @@ export function verifyPassToken(token: string | null | undefined): boolean {
 }
 
 /**
- * Validate a Lemon Squeezy license key via their API. Returns true only if
- * the key is genuine and active. Requires LEMONSQUEEZY_API_KEY.
- * Optionally scope to a specific store/product via env.
+ * Validate a Lemon Squeezy license key via their API.
+ * Returns validity plus the product id, so the caller can distinguish a
+ * Route Pass purchase from an Insider membership
+ * (LEMONSQUEEZY_INSIDER_PRODUCT_ID).
  */
-export async function validateLicenseKey(licenseKey: string): Promise<boolean> {
+export async function validateLicenseKey(
+  licenseKey: string,
+): Promise<{ valid: boolean; productId?: number }> {
   const apiKey = process.env.LEMONSQUEEZY_API_KEY;
-  if (!apiKey || !licenseKey) return false;
+  if (!apiKey || !licenseKey) return { valid: false };
   try {
     const res = await fetch("https://api.lemonsqueezy.com/v1/licenses/validate", {
       method: "POST",
@@ -63,13 +70,17 @@ export async function validateLicenseKey(licenseKey: string): Promise<boolean> {
       },
       body: new URLSearchParams({ license_key: licenseKey.trim() }),
     });
-    if (!res.ok) return false;
+    if (!res.ok) return { valid: false };
     const data = (await res.json()) as {
       valid?: boolean;
       license_key?: { status?: string };
+      meta?: { product_id?: number };
     };
-    return Boolean(data.valid && data.license_key?.status !== "disabled");
+    return {
+      valid: Boolean(data.valid && data.license_key?.status !== "disabled"),
+      productId: data.meta?.product_id,
+    };
   } catch {
-    return false;
+    return { valid: false };
   }
 }

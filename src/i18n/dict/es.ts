@@ -320,6 +320,7 @@ export const es: Dict = {
     title: "El Drop Semanal",
     sub: "Una entrega por semana: localizaciones recién verificadas, datos re-comprobados y playbooks probados. Los Insiders lo leen primero.",
     insiderNote: "Los miembros Insider reciben cada drop 7 días antes en su correo.",
+    insiderLocked: "Acceso anticipado Insider — público el",
     tagNew: "Nuevos lugares",
     tagReverified: "Re-verificado",
     tagPlaybook: "Playbook",

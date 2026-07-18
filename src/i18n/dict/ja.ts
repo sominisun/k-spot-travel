@@ -319,6 +319,7 @@ export const ja: Dict = {
     title: "ウィークリードロップ",
     sub: "週に1本：新しく検証したロケ地、再確認した情報、実地検証プレイブック。Insiderが最初に読めます。",
     insiderNote: "Insider会員は各ドロップを7日早くメールで受け取れます。",
+    insiderLocked: "Insider先行公開 — 一般公開日:",
     tagNew: "新スポット",
     tagReverified: "再検証",
     tagPlaybook: "プレイブック",

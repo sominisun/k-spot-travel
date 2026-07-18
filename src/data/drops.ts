@@ -9,9 +9,28 @@ export interface Drop {
   excerpt: string;
   body: string[];
   links: { label: string; href: string }[];
+  /** Insider early access: body stays locked for the public until this date */
+  insiderUntil?: string; // yyyy-mm-dd
 }
 
 export const DROPS: Drop[] = [
+  {
+    slug: "scene-recreation-guides",
+    date: "2026-07-19",
+    insiderUntil: "2026-07-26",
+    tag: "playbook",
+    title: "Scene-recreation guides land on 23 spot pages",
+    excerpt:
+      "Where to stand, which direction, what time of day — every major pilgrimage spot now carries a shot recipe and an honest 'what it's like now' note.",
+    body: [
+      "The one-line scene note grows up: 23 of the most-visited pairs — Goblin's breakwater, the Iseltwald pier, Geumga Plaza's rooftop, Lovely Runner's umbrella bridge and more — now tell you exactly where to plant your feet, which way to face, and which hour delivers the frame. Episode tags appear only where a scene's placement is beyond doubt.",
+      "Each guide comes with a field-honest counterweight: what the place is actually like today — the queue at the photo frame, the quiet-hours rules, the seasons that match the screen. Recreating a scene should never mean being surprised by reality.",
+    ],
+    links: [
+      { label: "Try one: Jumunjin breakwater", href: "/spots/jumunjin-breakwater" },
+      { label: "All filming spots", href: "/spots" },
+    ],
+  },
   {
     slug: "vincenzo-geumga-plaza-photos",
     date: "2026-07-18",

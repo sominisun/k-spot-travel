@@ -136,7 +136,7 @@ export function PlannerClient({
       });
       const j = await res.json();
       if (j.ok) {
-        grantPass(j.token);
+        grantPass(j.token, j.tier === "insider" ? "insider" : "pass");
         setPass(true);
         setKeyState("idle");
       } else {

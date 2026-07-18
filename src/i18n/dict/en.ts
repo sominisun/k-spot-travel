@@ -318,6 +318,7 @@ export const en = {
     title: "The Weekly Drop",
     sub: "One dispatch a week: newly verified filming locations, re-checked intel and field-tested playbooks. Insiders read them first.",
     insiderNote: "Insider members get each drop 7 days early, straight to their inbox.",
+    insiderLocked: "Insider early access — public on",
     tagNew: "New spots",
     tagReverified: "Re-verified",
     tagPlaybook: "Playbook",

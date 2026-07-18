@@ -317,6 +317,7 @@ export const zh: Dict = {
     title: "每周速递",
     sub: "每周一篇：新核实的取景地、复核情报与实测攻略。Insider 会员最先阅读。",
     insiderNote: "Insider 会员提前 7 天在邮箱收到每期速递。",
+    insiderLocked: "Insider 抢先看 — 公开日期:",
     tagNew: "新取景地",
     tagReverified: "重新核实",
     tagPlaybook: "实战攻略",

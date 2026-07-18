@@ -319,6 +319,7 @@ export const ko: Dict = {
     title: "주간 드롭",
     sub: "일주일에 한 번: 새로 검증한 촬영지, 재확인 정보, 현장 검증 플레이북. Insider가 가장 먼저 읽습니다.",
     insiderNote: "Insider 멤버는 모든 드롭을 7일 먼저 메일로 받습니다.",
+    insiderLocked: "Insider 선공개 — 전체 공개일:",
     tagNew: "신규 스팟",
     tagReverified: "재검증",
     tagPlaybook: "플레이북",

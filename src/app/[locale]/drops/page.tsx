@@ -5,6 +5,7 @@ import { l } from "@/i18n/config";
 import { DROPS } from "@/data/drops";
 import { SectionHeading } from "@/components/ui";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { InsiderDrop } from "@/components/InsiderDrop";
 
 export function generateStaticParams() {
   return localeParams();
@@ -47,7 +48,16 @@ export default async function DropsPage({
       </div>
 
       <div className="mt-10 space-y-10">
-        {DROPS.map((drop) => (
+        {DROPS.map((drop) =>
+          drop.insiderUntil && drop.insiderUntil > new Date().toISOString().slice(0, 10) ? (
+            <InsiderDrop
+              key={drop.slug}
+              drop={drop}
+              locale={locale}
+              tagLabel={t[TAG_KEY[drop.tag]]}
+              lockedText={t.insiderLocked}
+            />
+          ) : (
           <article key={drop.slug} className="border-b border-line pb-9">
             <p className="text-xs text-ink-faint">
               <span className="mr-2 rounded-[4px] border border-celadon px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-celadon uppercase">
@@ -74,7 +84,8 @@ export default async function DropsPage({
               ))}
             </p>
           </article>
-        ))}
+          ),
+        )}
       </div>
 
       <p className="mt-8 text-sm text-ink-faint">{t.insiderNote}</p>
