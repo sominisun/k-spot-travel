@@ -43,6 +43,8 @@ export const es: Dict = {
     sceneNote: "La escena",
     shotTip: "Recrea la escena",
     nowNote: "Cómo está ahora",
+    taxiCard: "Muéstrale esto al taxista",
+    taxiHint: "El nombre en coreano más “lléveme aquí, por favor”: cualquier conductor lo entiende. Para más precisión, abre el enlace de Naver Map y muestra el pin.",
     howToGet: "Cómo llegar",
     address: "Dirección",
     hours: "Horario",

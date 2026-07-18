@@ -43,6 +43,8 @@ export const ko: Dict = {
     sceneNote: "그 장면",
     shotTip: "그 장면 그대로 찍기",
     nowNote: "지금의 모습",
+    taxiCard: "기사님께 보여주세요",
+    taxiHint: "한국어 이름과 함께 보여주면 어디든 통합니다.",
     howToGet: "가는 법",
     address: "주소",
     hours: "운영시간",

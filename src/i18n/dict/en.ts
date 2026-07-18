@@ -41,6 +41,8 @@ export const en = {
     sceneNote: "The scene",
     shotTip: "Recreate the shot",
     nowNote: "There now",
+    taxiCard: "Show this to your driver",
+    taxiHint: "The Korean name plus “please take me here” — every driver can work with this. For precision, open the Naver Map link below and show the pin.",
     howToGet: "Getting there",
     address: "Address",
     hours: "Hours",

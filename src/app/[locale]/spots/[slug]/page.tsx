@@ -161,6 +161,16 @@ export default async function SpotPage({
               <FactRow label={dict.common.admission}>{spot.admission}</FactRow>
             ) : null}
           </dl>
+          {source.koreanName && locale !== "ko" ? (
+            <div className="mt-4 rounded-[8px] border-2 border-indigo/25 bg-band p-4">
+              <p className="text-[10px] font-bold tracking-[0.18em] text-indigo uppercase">
+                {dict.common.taxiCard}
+              </p>
+              <p className="mt-1.5 font-display text-2xl font-bold">{source.koreanName}</p>
+              <p className="text-sm text-ink-soft">여기로 가 주세요</p>
+              <p className="mt-2 text-[11px] leading-relaxed text-ink-faint">{dict.common.taxiHint}</p>
+            </div>
+          ) : null}
           <div className="mt-4 flex flex-wrap gap-2">
             <a
               href={googleMapsUrl(spot.mapQuery)}

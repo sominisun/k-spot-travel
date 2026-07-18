@@ -43,6 +43,8 @@ export const zh: Dict = {
     sceneNote: "那个场景",
     shotTip: "复刻同款镜头",
     nowNote: "现场近况",
+    taxiCard: "给司机看这个",
+    taxiHint: "韩文名称加上“请带我去这里”，任何司机都能看懂。想更精确，请打开下方 NAVER 地图链接给司机看定位。",
     howToGet: "交通方式",
     address: "地址",
     hours: "营业时间",

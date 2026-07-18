@@ -43,6 +43,8 @@ export const ja: Dict = {
     sceneNote: "あのシーン",
     shotTip: "あのシーンを再現",
     nowNote: "現地のいま",
+    taxiCard: "運転手さんに見せてください",
+    taxiHint: "韓国語名と「ここへ行ってください」の一文。どのドライバーにも伝わります。正確を期すなら下のNAVERマップのピンを見せてください。",
     howToGet: "アクセス",
     address: "住所",
     hours: "営業時間",
