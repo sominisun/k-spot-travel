@@ -189,6 +189,8 @@ export const ja: Dict = {
     lockedHint: "ロック中 — ルートパス限定",
     startDate: "旅行開始日（任意）",
     teaserNote: "DAY 1はルートパスの詳細レベルをそのまま公開中。全日程の時間・シーンノート・予約カレンダーは下で解除できます。",
+    sharePlan: "プランを共有",
+    sharedPlan: "リンクをコピーしました！",
   },
   quiz: {
     title: "次の旅はどのK-ワールド？",
@@ -202,6 +204,8 @@ export const ja: Dict = {
     retake: "もう一度",
     share: "結果リンクをコピー",
     shared: "コピーしました！",
+    friendKicker: "友達のマッチ結果",
+    friendSub: "60秒診断で、あなたのK-ワールドも確かめてみましょう。",
     q1: "理想のKドラマ的な朝は？",
     q1a: "朝の光の宮殿の石垣",
     q1b: "眠たげな漁村",

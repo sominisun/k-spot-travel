@@ -86,14 +86,18 @@ export function PlannerClient({
   locale,
   dict,
   data,
+  initialShows,
+  initialDays,
 }: {
   locale: Locale;
   dict: Dict;
   data: PlannerData;
+  initialShows?: string[];
+  initialDays?: number;
 }) {
   const t = dict.planner;
-  const [selected, setSelected] = useState<string[]>([]);
-  const [days, setDays] = useState(3);
+  const [selected, setSelected] = useState<string[]>(initialShows ?? []);
+  const [days, setDays] = useState(initialDays ?? 3);
   const [pace, setPace] = useState<Pace>("standard");
   const [interests, setInterests] = useState<string[]>(["food"]);
   const [query, setQuery] = useState("");
@@ -105,6 +109,7 @@ export function PlannerClient({
   const [licenseKey, setLicenseKey] = useState("");
   const [keyState, setKeyState] = useState<"idle" | "busy" | "invalid">("idle");
   const [startDate, setStartDate] = useState("");
+  const [shared, setShared] = useState(false);
 
   /** Trip start: user-picked date, else 2 weeks out (planning default). */
   const tripStart = () => {
@@ -518,6 +523,17 @@ export function PlannerClient({
               </span>
             </h2>
             <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={async () => {
+                  const url = `${window.location.origin}${l(locale, "/planner")}?shows=${selected.join(",")}&days=${days}`;
+                  await navigator.clipboard.writeText(url);
+                  setShared(true);
+                }}
+                className="inline-flex items-center gap-1.5 rounded-[8px] border border-line px-3.5 py-1.5 text-[13px] font-semibold hover:border-indigo"
+              >
+                <Icon name="sparkle" size={14} /> {shared ? t.sharedPlan : t.sharePlan}
+              </button>
               <button type="button" onClick={() => navigator.clipboard.writeText(planText())} className="inline-flex items-center gap-1.5 rounded-[8px] border border-line px-3.5 py-1.5 text-[13px] font-semibold hover:border-indigo">
                 <Icon name="copy" size={14} /> {t.copyPlan}
               </button>

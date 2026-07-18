@@ -189,6 +189,8 @@ export const ko: Dict = {
     lockedHint: "잠김 — 루트 패스 콘텐츠",
     startDate: "여행 시작일 (선택)",
     teaserNote: "1일차는 루트 패스의 상세 수준 그대로 보여드립니다. 아래에서 전체 일정의 시간·장면 노트·예약 캘린더를 잠금 해제하세요.",
+    sharePlan: "내 플랜 공유",
+    sharedPlan: "링크 복사됨!",
   },
   quiz: {
     title: "내 다음 여행지는 어느 K-세계?",
@@ -202,6 +204,8 @@ export const ko: Dict = {
     retake: "다시 하기",
     share: "결과 링크 복사",
     shared: "복사되었습니다!",
+    friendKicker: "친구의 매칭 결과",
+    friendSub: "60초 테스트로 당신의 K-월드도 확인해 보세요.",
     q1: "이상적인 K-드라마 아침은?",
     q1a: "아침 햇살의 궁궐 돌담",
     q1b: "졸린 어촌 마을",

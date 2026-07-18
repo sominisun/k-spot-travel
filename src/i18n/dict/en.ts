@@ -187,6 +187,8 @@ export const en = {
     lockedHint: "Locked — Route Pass content",
     startDate: "Trip start date (optional)",
     teaserNote: "Day 1 shows the full Route Pass detail. Unlock every day — timings, scene notes and the booking calendar — below.",
+    sharePlan: "Share my plan",
+    sharedPlan: "Link copied!",
   },
   quiz: {
     title: "Which K-world is your next trip?",
@@ -200,6 +202,8 @@ export const en = {
     retake: "Retake",
     share: "Copy my result link",
     shared: "Link copied!",
+    friendKicker: "Your friend matched with",
+    friendSub: "Take the 60-second quiz and see if your K-world agrees.",
     q1: "Your ideal K-drama morning?",
     q1a: "Palace walls in soft light",
     q1b: "A sleepy fishing village",

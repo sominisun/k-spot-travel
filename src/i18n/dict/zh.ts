@@ -187,6 +187,8 @@ export const zh: Dict = {
     lockedHint: "已锁定 — 通行证专享",
     startDate: "出行日期（可选）",
     teaserNote: "第 1 天展示的就是路线通行证的完整详情。在下方解锁全部行程的时间、场景笔记与订位日历。",
+    sharePlan: "分享我的行程",
+    sharedPlan: "链接已复制！",
   },
   quiz: {
     title: "你的下一站是哪个 K-世界？",
@@ -200,6 +202,8 @@ export const zh: Dict = {
     retake: "再测一次",
     share: "复制结果链接",
     shared: "已复制！",
+    friendKicker: "你朋友的匹配结果",
+    friendSub: "用 60 秒测试看看你的 K-世界是哪一个。",
     q1: "理想的韩剧式清晨？",
     q1a: "晨光中的宫墙",
     q1b: "困倦的渔村",

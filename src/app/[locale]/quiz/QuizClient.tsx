@@ -48,10 +48,12 @@ export function QuizClient({
   locale,
   dict,
   titles,
+  friendMatch,
 }: {
   locale: Locale;
   dict: Dict;
   titles: Record<string, string>;
+  friendMatch?: string;
 }) {
   const t = dict.quiz;
   const questions = useMemo(
@@ -105,13 +107,22 @@ export function QuizClient({
 
   if (step === -1) {
     return (
-      <button
-        type="button"
-        onClick={() => setStep(0)}
-        className="mt-8 inline-flex items-center gap-2 rounded-[8px] bg-indigo px-6 py-3 font-bold text-white hover:bg-indigo-deep"
-      >
-        <Icon name="sparkle" size={16} /> {t.start}
-      </button>
+      <div className="mt-8">
+        {friendMatch ? (
+          <div className="mb-5 rounded-[8px] border-2 border-indigo/25 bg-indigo-soft/40 p-4">
+            <p className="text-[11px] font-bold tracking-[0.18em] text-indigo uppercase">{t.friendKicker}</p>
+            <p className="mt-1 font-display text-xl font-bold">{titles[friendMatch]}</p>
+            <p className="mt-1 text-sm text-ink-soft">{t.friendSub}</p>
+          </div>
+        ) : null}
+        <button
+          type="button"
+          onClick={() => setStep(0)}
+          className="inline-flex items-center gap-2 rounded-[8px] bg-indigo px-6 py-3 font-bold text-white hover:bg-indigo-deep"
+        >
+          <Icon name="sparkle" size={16} /> {t.start}
+        </button>
+      </div>
     );
   }
 

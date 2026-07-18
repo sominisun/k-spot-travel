@@ -189,6 +189,8 @@ export const es: Dict = {
     lockedHint: "Bloqueado — contenido del Route Pass",
     startDate: "Fecha de inicio del viaje (opcional)",
     teaserNote: "El día 1 muestra el nivel de detalle completo del Route Pass. Desbloquea todos los días — horarios, notas de escenas y calendario de reservas — abajo.",
+    sharePlan: "Compartir mi plan",
+    sharedPlan: "¡Enlace copiado!",
   },
   quiz: {
     title: "¿Qué K-mundo es tu próximo viaje?",
@@ -202,6 +204,8 @@ export const es: Dict = {
     retake: "Repetir",
     share: "Copiar enlace de mi resultado",
     shared: "¡Enlace copiado!",
+    friendKicker: "El match de tu amigo",
+    friendSub: "Haz el test de 60 segundos y descubre tu K-mundo.",
     q1: "¿Tu mañana ideal de K-drama?",
     q1a: "Muros de palacio con luz suave",
     q1b: "Un pueblo pesquero dormido",
