@@ -18,7 +18,7 @@ export interface FaqEntry {
 export const FAQ: FaqEntry[] = [
   // ───────────────────────── A. Airport & transport ─────────────────────────
   {
-    keywords: ["airport", "incheon", "arex", "train", "bus", "공항", "인천공항", "서울까지", "어떻게 가", "空港", "空港から", "ソウルまで", "机场", "怎么去首尔", "aeropuerto", "cómo llegar"],
+    keywords: ["airport", "incheon", "arex", "train", "bus", "공항", "인천공항", "서울까지", "空港", "空港から", "ソウルまで", "机场", "怎么去首尔", "aeropuerto", "cómo llegar"],
     answer:
       "From Incheon Airport: the all-stop AREX train is the best value (~₩4–5k with T-money, 59 min), the Express is fastest to Seoul Station (~₩11k, 43 min), and limousine buses win with heavy luggage (~₩17–18k door-to-district).",
     links: [{ label: "Airport to Seoul, compared", href: "/guide/airport-to-seoul" }],
@@ -582,7 +582,7 @@ export const FAQ: FaqEntry[] = [
     links: [{ label: "Best time to visit Korea", href: "/guide/best-time-to-visit-korea" }],
   },
   {
-    keywords: ["cherry blossom", "spring", "sakura", "벚꽃", "봄 여행", "桜", "花見", "樱花", "cerezo en flor"],
+    keywords: ["cherry blossom", "spring", "sakura", "벚꽃", "언제", "봄 여행", "桜", "花見", "樱花", "cerezo en flor"],
     answer:
       "Cherry blossoms sweep south-to-north from late March (Jeju) to mid-April (Seoul) — Yeouido, palace walls and Naksan's fortress paths are prime drama-scene territory. The window is ~10 days per city; build flexibility into bloom-chasing plans.",
     links: [{ label: "Best time to visit Korea", href: "/guide/best-time-to-visit-korea" }],
@@ -712,6 +712,191 @@ export const FAQ: FaqEntry[] = [
       { label: "Share a photo on Discord", href: "/community" },
       { label: "Our image policy", href: "/about" },
     ],
+  },
+
+  // ─────────────────── K. Experiences & culture ───────────────────
+  {
+    keywords: ["hanbok", "rental", "palace", "free palace", "한복", "한복 대여", "ハンボク", "韓服レンタル", "韩服", "汉服体验", "hanbok alquiler"],
+    answer:
+      "Rent a hanbok near Gyeongbokgung or Bukchon (₩15–30k for 4 hours, hair styling extra) and palace entry becomes free — plus your photos instantly look like a sageuk. Book online for discounts or walk into any rental street shop; winter rentals include padded jackets.",
+    links: [
+      { label: "Bukchon Hanok Village", href: "/spots/bukchon-hanok-village" },
+      { label: "Seoul K-drama classics route", href: "/routes/seoul-kdrama-classics" },
+    ],
+  },
+  {
+    keywords: ["gyeongbokgung", "palace", "guard ceremony", "changing of the guard", "경복궁", "궁궐", "수문장 교대식", "景福宮", "王宮", "景福宫", "古宫", "palacio"],
+    answer:
+      "Gyeongbokgung runs 09:00–18:00 (closed Tuesdays), entry ₩3,000 — free in hanbok. Catch the royal guard changing ceremony at 10:00 and 14:00 at Gwanghwamun Gate. Deoksugung's stonewall path (of Goblin fame) is a 15-minute walk south.",
+    links: [
+      { label: "Deoksugung stonewall path", href: "/spots/deoksugung-stonewall-path" },
+      { label: "Seoul K-drama classics route", href: "/routes/seoul-kdrama-classics" },
+    ],
+  },
+  {
+    keywords: ["dmz", "jsa", "panmunjom", "border tour", "비무장지대", "판문점", "非武装地帯", "板門店", "非军事区", "板门店", "zona desmilitarizada"],
+    answer:
+      "The DMZ is tour-only — no independent visits. Half-day bus tours from Seoul (~$40–90) cover the third tunnel, Dora Observatory and Imjingak; JSA access is limited and books out weeks ahead. Bring your passport; dress code applies on JSA tours.",
+    links: [{ label: "How to plan a K-drama trip", href: "/guide/how-to-plan-kdrama-trip" }],
+  },
+  {
+    keywords: ["namsan", "seoul tower", "cable car", "n tower", "남산타워", "케이블카", "남산 전망대", "ソウルタワー", "ケーブルカー", "南山塔", "首尔塔", "缆车", "torre de seúl"],
+    answer:
+      "N Seoul Tower: take the cable car from Myeongdong side (~₩15k round trip) or walk the Namsan trails for free city views. The observatory runs ~10:00–23:00 — sunset slots are the money hour. The love-lock terrace below the tower is free and very much a drama set piece.",
+    links: [{ label: "Namsan Seoul Tower guide", href: "/spots/namsan-seoul-tower" }],
+  },
+  {
+    keywords: ["han river", "hangang", "picnic", "한강", "한강공원", "한강 라면", "치맥", "漢江", "ピクニック", "汉江", "野餐", "río han"],
+    answer:
+      "The Han River park ritual: rent a mat, order fried chicken to your spot by app (delivery riders find you by zone number), cook instant ramyeon at the convenience-store machines, and stay for the Banpo Bridge rainbow fountain (Apr–Oct evenings). Yeouido and Ttukseom are the classic sections.",
+    links: [{ label: "K-drama food bucket list", href: "/guide/kdrama-food-bucket-list" }],
+  },
+  {
+    keywords: ["photo booth", "photobooth", "four cut", "인생네컷", "포토부스", "네컷사진", "プリクラ", "フォトブース", "大头贴", "四格照片", "fotomatón"],
+    answer:
+      "Life Four Cuts (인생네컷) booths are everywhere in Hongdae, Myeongdong and Seongsu — ₩4–5k per session, props included, frames often collab with dramas and idols. It's the cheapest souvenir in Korea and a K-content rite of passage. Grab the QR for digital copies.",
+    links: [{ label: "Seoul neighborhoods for fans", href: "/guide/seoul-neighborhoods-for-fans" }],
+  },
+  {
+    keywords: ["concert", "ticket", "fan meeting", "fanmeeting", "콘서트", "티켓", "티켓팅", "팬미팅", "コンサート", "チケット", "ファンミ", "演唱会", "门票", "concierto", "entradas"],
+    answer:
+      "K-pop tickets sell via Interpark Global, Yes24 Global and Melon Ticket — foreigner-friendly English flows exist, but big acts sell out in minutes; join fan-club presales when possible. For spontaneous trips, check smaller venues and university festivals (spring/fall) — often free.",
+    links: [
+      { label: "COEX K-pop Square", href: "/spots/coex-kpop-square" },
+      { label: "Ask fans on Discord", href: "/community" },
+    ],
+  },
+  {
+    keywords: ["jjimjilbang", "sauna", "spa", "bathhouse", "찜질방", "사우나", "チムジルバン", "汗蒸幕", "汗蒸房", "sauna coreana"],
+    answer:
+      "Jjimjilbang 101: pay at entry (~₩10–20k, 24h houses exist), swap shoes for a locker key, bathe fully (yes, fully) in the gender-split baths, then don the uniform for the mixed sauna floors. Do the lamb-horn towel hat, eat baked eggs and sikhye — it's a drama scene you get to live.",
+    links: [{ label: "Korea travel etiquette", href: "/guide/korea-travel-etiquette" }],
+  },
+  {
+    keywords: ["noraebang", "karaoke", "sing", "노래방", "코인노래방", "カラオケ", "コインカラオケ", "练歌房", "卡拉ok", "karaoke coreano"],
+    answer:
+      "Noraebang comes in two flavors: coin booths (₩500–1,000 per song, solo-friendly, all over Hongdae) and room rentals (~₩15–25k/hour for groups). English songbooks are standard. It's how Koreans actually end a night out — no singing skill required, enthusiasm mandatory.",
+    links: [{ label: "Seoul neighborhoods for fans", href: "/guide/seoul-neighborhoods-for-fans" }],
+  },
+  {
+    keywords: ["gimpo", "which airport", "airport difference", "김포공항", "김포", "차이", "김포 인천", "金浦空港", "金浦机场", "aeropuerto gimpo"],
+    answer:
+      "Two airports, different jobs: Incheon (ICN) handles most international long-haul; Gimpo (GMP) is for domestic hops (Jeju!) and short routes to Tokyo/Shanghai/Taipei. Gimpo is 30–40 min closer to central Seoul. Double-check your terminal — the mistake costs an hour.",
+    links: [{ label: "Airport to Seoul guide", href: "/guide/airport-to-seoul" }],
+  },
+  {
+    keywords: ["late arrival", "overnight airport", "midnight flight", "새벽 도착", "심야 도착", "深夜着", "空港泊", "深夜到达", "红眼航班", "llegada nocturna"],
+    answer:
+      "Landing after midnight? AREX stops ~23:30, so your options are: airport limousine night buses (limited lines), the N6001 night bus, a taxi (~₩55–75k to central Seoul on late-night meter), or Incheon's 24h spa/capsule hotels until first train at ~05:20. Book the first night's hotel near a bus line.",
+    links: [{ label: "Airport to Seoul guide", href: "/guide/airport-to-seoul" }],
+  },
+  {
+    keywords: ["temple stay", "templestay", "buddhist", "템플스테이", "テンプルステイ", "寺院滞在", "寺庙体验", "templo estancia"],
+    answer:
+      "Templestay programs (templestay.com, English site) run at 25+ temples: one night of monastic rhythm — 108 bows, dawn chanting, tea with a monk, temple food — from ~₩50–100k. Jogyesa and Bongeunsa offer easy Seoul tastes; mountain temples deliver the full drama-worthy silence.",
+    links: [{ label: "Gwaneumsa Temple (Jeju)", href: "/spots/gwaneumsa-temple" }],
+  },
+  {
+    keywords: ["jeonju", "hanok village", "bibimbap", "전주", "한옥마을", "비빔밥", "全州", "韓屋村", "全州韩屋村", "拌饭", "jeonju aldea"],
+    answer:
+      "Jeonju Hanok Village packs 700+ traditional houses, the country's definitive bibimbap, choco pie originals and hanbok-clad crowds into one walkable grid — plus Twenty-Five Twenty-One's nostalgic lanes. KTX from Seoul ~1h40m; stay overnight for the lantern-lit evenings.",
+    links: [{ label: "2521 filming spots", href: "/shows/twenty-five-twenty-one" }],
+  },
+  {
+    keywords: ["bukchon rules", "quiet hours", "residential area", "북촌 주의", "주민 거주", "北村のマナー", "静かに", "北村", "居民区", "normas bukchon"],
+    answer:
+      "Bukchon is a lived-in neighborhood, not a set: observe the posted quiet hours (10:00–17:00 visiting window on the main hanok lanes), keep voices low, don't open gates or fly drones, and skip tripods in narrow alleys. Guards politely enforce it — fines exist for noise violations.",
+    links: [
+      { label: "Bukchon Hanok Village", href: "/spots/bukchon-hanok-village" },
+      { label: "Filming-location photo etiquette", href: "/guide/filming-location-photo-etiquette" },
+    ],
+  },
+  {
+    keywords: ["myeongdong night", "night market", "street stalls evening", "명동 야시장", "명동 밤", "ミョンドン屋台", "明洞夜市", "puestos nocturnos"],
+    answer:
+      "Myeongdong's street-food stalls roll out from ~16:00 — grilled lobster tails, tornado potatoes, hotteok, strawberry mochi — peaking 18:00–21:00. Cash is fastest, most stalls take cards now. Come hungry, graze standing, and finish at a photo booth like everyone else.",
+    links: [
+      { label: "Myeongdong shopping street", href: "/spots/myeongdong-shopping-street" },
+      { label: "K-drama food bucket list", href: "/guide/kdrama-food-bucket-list" },
+    ],
+  },
+  {
+    keywords: ["dongdaemun", "night shopping", "ddp", "동대문", "밤 쇼핑", "東大門", "夜市", "东大门", "夜购", "compras nocturnas"],
+    answer:
+      "Dongdaemun is Seoul's insomnia district: wholesale fashion towers open until 04:00–05:00, DDP's neon curves (a drama backdrop itself) light up after dark, and the food alleys never really close. Go after 22:00 for the real energy — King the Land fans will recognize the glow.",
+    links: [
+      { label: "Dongdaemun Market", href: "/spots/dongdaemun-market" },
+      { label: "King the Land spots", href: "/shows/king-the-land" },
+    ],
+  },
+  {
+    keywords: ["hongdae", "busking", "nightlife", "clubs", "홍대", "버스킹", "홍대 밤", "ホンデ", "路上ライブ", "弘大", "街头表演", "vida nocturna"],
+    answer:
+      "Hongdae runs on student energy: free busking stages nightly around the main walking street (~19:00–22:00), indie venues, late cafes and clubs that peak absurdly late. It's the neighborhood where half the youth dramas set their 'first band gig' scene — now you're an extra.",
+    links: [{ label: "Seoul neighborhoods for fans", href: "/guide/seoul-neighborhoods-for-fans" }],
+  },
+  {
+    keywords: ["cherry blossom spot", "where cherry", "blossom viewing", "벚꽃 명소", "벚꽃 어디", "花見スポット", "桜の名所", "樱花景点", "赏樱", "ver cerezos"],
+    answer:
+      "Seoul's best petals: Yeouido's Yunjung-ro (festival crowds), Seokchon Lake, Naksan's fortress walls at golden hour, and Deoksugung's stonewall path for the full drama frame. Arrive before 09:00 for photos without a thousand co-stars. Jeju blooms two weeks earlier.",
+    links: [
+      { label: "Best time to visit Korea", href: "/guide/best-time-to-visit-korea" },
+      { label: "Naksan Park", href: "/spots/naksan-park" },
+    ],
+  },
+  {
+    keywords: ["fireworks", "festival autumn", "hanwha", "불꽃축제", "불꽃놀이", "花火大会", "烟花节", "烟火", "fuegos artificiales"],
+    answer:
+      "The Seoul International Fireworks Festival (one Saturday in early October, Yeouido) is the year's biggest free spectacle — a million people, so claim Han River grass by mid-afternoon or watch from Ichon's quieter bank. Check the date each year; it moves with holidays.",
+    links: [{ label: "Best time to visit Korea", href: "/guide/best-time-to-visit-korea" }],
+  },
+  {
+    keywords: ["smoking", "smoke", "smoking area", "cigarette", "흡연", "담배", "흡연구역", "喫煙", "タバコ", "吸烟", "抽烟", "fumar"],
+    answer:
+      "Korea bans smoking on most streets, near stations, in parks and all indoor public spaces — fines ₩50–100k, actively enforced in Seoul. Look for marked smoking booths near stations and building corners. Vaping follows the same rules. Convenience stores sell cigarettes; ID may be asked.",
+    links: [{ label: "Korea travel etiquette", href: "/guide/korea-travel-etiquette" }],
+  },
+  {
+    keywords: ["drinking age", "alcohol", "soju rules", "drink korea", "음주", "소주", "주류 나이", "飲酒年齢", "お酒", "喝酒年龄", "饮酒", "edad para beber"],
+    answer:
+      "Drinking age is 19 (international age); convenience stores card foreigners routinely — carry your passport. Soju etiquette from the dramas is real: pour for others first, receive with two hands, turn slightly away from elders on the first shot. Public drinking (Han River chimaek!) is legal.",
+    links: [
+      { label: "Korea travel etiquette", href: "/guide/korea-travel-etiquette" },
+      { label: "K-drama food bucket list", href: "/guide/kdrama-food-bucket-list" },
+    ],
+  },
+  {
+    keywords: ["merch", "goods", "photocard", "album", "buy kpop", "굿즈", "포토카드", "음반 사기", "グッズ", "フォトカード", "周边", "专辑", "photocards", "mercancía kpop"],
+    answer:
+      "For albums and official merch: Myeongdong's music floors, the COEX mall's entertainment stores, and Hongdae's K-pop shops cover the majors; Withmuu and Music Korea handle preorders with airport pickup. Photocard trading happens openly at Hongdae markets — bring sleeves.",
+    links: [
+      { label: "Myeongdong shopping street", href: "/spots/myeongdong-shopping-street" },
+      { label: "COEX K-pop Square", href: "/spots/coex-kpop-square" },
+    ],
+  },
+  {
+    keywords: ["date spot", "couple", "romantic", "love lock", "proposal", "데이트 코스", "커플", "자물쇠", "デートスポット", "カップル", "约会地点", "情侣", "romántico", "cita"],
+    answer:
+      "Seoul's proven romance circuit, straight from the dramas: Namsan's love-lock terrace at dusk, Deoksugung's stonewall walk, a Han River picnic into the fountain show, and Naksan's fortress night view. Book one Culinary Class Wars table and you've out-planned most K-drama leads.",
+    links: [
+      { label: "Namsan Seoul Tower", href: "/spots/namsan-seoul-tower" },
+      { label: "Deoksugung stonewall path", href: "/spots/deoksugung-stonewall-path" },
+    ],
+  },
+  {
+    keywords: ["rainy", "rainy day", "rain plan", "what if rain", "비 오는 날", "비올 때", "장마 때", "雨の日", "雨なら", "下雨", "雨天", "día de lluvia"],
+    answer:
+      "Rain plan, drama edition: The Hyundai Seoul's indoor garden (Queen of Tears), COEX's mall-aquarium-library trio, King the Land's hotel-lobby glamour, a jjimjilbang afternoon, or a long Culinary Class Wars lunch. Umbrellas are ₩5k at any convenience store — or embrace the K-drama rain walk.",
+    links: [
+      { label: "The Hyundai Seoul", href: "/spots/the-hyundai-seoul" },
+      { label: "King the Land spots", href: "/shows/king-the-land" },
+    ],
+  },
+  {
+    keywords: ["skiing", "ski resort", "snowboard", "winter sports", "스키장", "스키 타", "용평", "スキー場", "スノボ", "滑雪场", "单板", "esquí"],
+    answer:
+      "Yes — Yongpyong (Winter Sonata's slopes) is ~2.5h from Seoul with day-trip shuttle packages including rentals (~₩60–100k all-in); Vivaldi Park is closer and more beginner-social. Season runs late November to early March. Gear and clothing rent on-site; book shuttles a day ahead.",
+    links: [{ label: "Yongpyong Resort", href: "/spots/yongpyong-resort" }],
   },
 
   // ─────────────────── J. About the site & contact ───────────────────

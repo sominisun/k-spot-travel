@@ -77,9 +77,11 @@ function matchFaq(query: string) {
       if (!ql.includes(k)) continue;
       // Distinctive keywords count double so one specific token can trigger
       // a match on its own: CJK tokens of 4+ chars (show titles like
-      // 오징어게임) and long Latin phrases (10+ chars, e.g. "cambio de
-      // divisas") are strong evidence; short generic tokens still need a pair.
-      score += (CJK.test(k) && k.length >= 4) || k.length >= 10 ? 2 : 1;
+      // 오징어게임; spaces excluded so "가는 법" stays generic) and long
+      // Latin phrases (10+ chars, e.g. "cambio de divisas") are strong
+      // evidence; short generic tokens still need a pair.
+      const cjkLen = k.replace(/\s+/g, "").length;
+      score += (CJK.test(k) && cjkLen >= 4) || k.length >= 10 ? 2 : 1;
     }
     if (score >= 2 && (!best || score > best.score)) best = { score, entry };
   }
