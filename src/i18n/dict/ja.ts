@@ -294,6 +294,15 @@ export const ja: Dict = {
     insiderDesc: "詳細プラン無制限、新作ガイド1週間先行、Insiderニュースレター、Discordロール。",
     refund: "デジタル商品 — PDF発行に未使用のパスは14日以内に返金します。",
   },
+  affCta: {
+    esimTitle: "出発前にeSIMを準備",
+    esimBody: "空港カウンターの列より、着陸と同時につながる方が快適です。Klookで韓国eSIMプランを比較 — 設定2分、到着後すぐ有効化。",
+    esimCta: "韓国eSIMを比較",
+    hotelTitle: "拠点エリアを決める",
+    hotelBody: "このガイドで紹介したエリアごとのホテル料金を比較 — 無料キャンセルで予約し、桜・紅葉シーズンは早めに確保を。",
+    hotelCta: "ホテルを比較",
+    disclosure: "このリンク経由のご予約で、追加費用なしに当サイトが手数料を受け取る場合があります。検証作業の運営費になります。",
+  },
   newsletter: {
     title: "The K Edit Weekly",
     sub: "週1回のドロップ：新しく検証したロケ地、いまのソウル、今月のファンフレーム。スパムなし、いつでも解除。",

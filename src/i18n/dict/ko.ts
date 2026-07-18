@@ -294,6 +294,15 @@ export const ko: Dict = {
     insiderDesc: "상세 일정 무제한, 신작 가이드 1주 선공개, Insider 뉴스레터, 디스코드 롤.",
     refund: "디지털 상품 — PDF 발송에 사용하지 않은 패스는 14일 내 환불됩니다.",
   },
+  affCta: {
+    esimTitle: "출발 전에 eSIM을 준비하세요",
+    esimBody: "공항 카운터 줄보다 착륙과 동시에 연결되는 쪽이 낫습니다. Klook에서 한국 eSIM 요금제를 비교하세요 — 설치 2분, 도착 즉시 활성화.",
+    esimCta: "한국 eSIM 비교하기",
+    hotelTitle: "베이스 동네를 정하세요",
+    hotelBody: "이 가이드가 다루는 동네별 숙소 가격을 비교하세요 — 무료 취소로 예약하고 벚꽃·단풍 시즌은 일찍 잠그는 게 답입니다.",
+    hotelCta: "호텔 비교하기",
+    disclosure: "이 링크로 예약하시면 추가 비용 없이 저희가 수수료를 받을 수 있습니다. 검증 작업 운영비로 쓰입니다.",
+  },
   newsletter: {
     title: "The K Edit Weekly",
     sub: "주 1회 드롭: 새로 검증된 촬영지, 지금 서울 소식, 이달의 팬 프레임. 스팸 없이, 언제든 해지.",

@@ -5,8 +5,9 @@ import { isLocale, l, LOCALES } from "@/i18n/config";
 import { resolveLocale } from "@/lib/page-utils";
 import { allArticles, getArticle } from "@/lib/data";
 import { categoryLabel, hasArticleL10n, lArticle } from "@/lib/localize";
-import { ADSENSE } from "@/lib/site";
+import { ADSENSE, PARTNERS } from "@/lib/site";
 import { AdSlot } from "@/components/AdSlot";
+import { AffiliateCta } from "@/components/AffiliateCta";
 import { Icon, Pill, Rule, TipBox } from "@/components/ui";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -39,6 +40,16 @@ export default async function ArticlePage({
   if (!source) notFound();
   const article = lArticle(source, locale);
   const translated = locale === "en" || hasArticleL10n(slug, locale);
+
+  // One clearly-disclosed affiliate callout on the pages where it answers
+  // the reader's actual next step. eSIM = Klook's top-commission category.
+  const AFF_CTA: Record<string, { kind: "esim" | "hotel"; href: string }> = {
+    "sim-esim-apps": { kind: "esim", href: PARTNERS.klookEsim() },
+    "airport-to-seoul": { kind: "esim", href: PARTNERS.klookEsim() },
+    "seoul-neighborhoods-for-fans": { kind: "hotel", href: PARTNERS.agodaSearch("Seoul") },
+    "busan-set-jetting": { kind: "hotel", href: PARTNERS.agodaSearch("Busan") },
+  };
+  const ctaSpec = AFF_CTA[slug];
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
@@ -115,6 +126,16 @@ export default async function ArticlePage({
           </section>
         ))}
       </div>
+
+      {ctaSpec ? (
+        <AffiliateCta
+          title={ctaSpec.kind === "esim" ? dict.affCta.esimTitle : dict.affCta.hotelTitle}
+          body={ctaSpec.kind === "esim" ? dict.affCta.esimBody : dict.affCta.hotelBody}
+          cta={ctaSpec.kind === "esim" ? dict.affCta.esimCta : dict.affCta.hotelCta}
+          href={ctaSpec.href}
+          disclosure={dict.affCta.disclosure}
+        />
+      ) : null}
 
       {article.faq?.length ? (
         <section className="mt-10">

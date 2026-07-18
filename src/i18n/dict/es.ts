@@ -295,6 +295,15 @@ export const es: Dict = {
       "Planes detallados ilimitados, guías de estrenos una semana antes, newsletter Insider y rol de Discord.",
     refund: "Producto digital — reembolso en 14 días si el pass no se usó para generar un PDF.",
   },
+  affCta: {
+    esimTitle: "Consigue tu eSIM antes de volar",
+    esimBody: "Aterrizar con conexión gana a las colas del aeropuerto. Compara planes de eSIM para Corea en Klook: dos minutos de instalación, activación al llegar.",
+    esimCta: "Comparar eSIM de Corea",
+    hotelTitle: "Elige tu barrio base",
+    hotelBody: "Compara precios en los barrios de esta guía: reserva con cancelación gratuita y asegura pronto las temporadas de cerezos y follaje.",
+    hotelCta: "Comparar hoteles",
+    disclosure: "Si reservas con este enlace podemos ganar una comisión sin coste extra para ti. Financia el trabajo de verificación.",
+  },
   newsletter: {
     title: "The K Edit Weekly",
     sub: "Un drop semanal: nuevas localizaciones verificadas, qué pasa en Seúl y el Fan Frame del mes. Sin spam, cancela cuando quieras.",

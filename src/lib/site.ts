@@ -38,6 +38,7 @@ const AFF = {
   oliveYoung: process.env.NEXT_PUBLIC_AFF_OLIVEYOUNG ?? "",
   styleKorean: process.env.NEXT_PUBLIC_AFF_STYLEKOREAN ?? "",
   yesStyle: process.env.NEXT_PUBLIC_AFF_YESSTYLE ?? "",
+  agoda: process.env.NEXT_PUBLIC_AFF_AGODA ?? "",
 } as const;
 
 /** Append an affiliate tracking query string (from env) if configured. */
@@ -56,6 +57,12 @@ export const PARTNERS = {
   /** Klook eSIM category — the highest-commission (up to 20%) placement. */
   klookEsim: () =>
     withAff("https://www.klook.com/en-US/wifi-sim/", AFF.klook),
+  /** Agoda hotel search (Korea's dominant OTA for foreign visitors). */
+  agodaSearch: (city: string) =>
+    withAff(
+      `https://www.agoda.com/search?city=&textToSearch=${encodeURIComponent(city)}`,
+      AFF.agoda,
+    ),
   trazySearch: (q: string) =>
     withAff(`https://www.trazy.com/search?q=${encodeURIComponent(q)}`, AFF.trazy),
   oliveYoungGlobal: withAff("https://global.oliveyoung.com/", AFF.oliveYoung),

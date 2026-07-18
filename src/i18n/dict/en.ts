@@ -293,6 +293,15 @@ export const en = {
       "Unlimited detailed plans, new-drop guides a week early, the Insider newsletter and a Discord role.",
     refund: "Digital goods — 14-day refund if the pass hasn't been used for a delivered PDF.",
   },
+  affCta: {
+    esimTitle: "Get your eSIM before you fly",
+    esimBody: "Landing connected beats airport counter queues. Compare Korea eSIM plans on Klook — install in two minutes, activate on arrival.",
+    esimCta: "Compare Korea eSIMs",
+    hotelTitle: "Pick your base neighborhood",
+    hotelBody: "Compare rates across the neighborhoods this guide covers — book free-cancellation and lock it in early for blossom and foliage season.",
+    hotelCta: "Compare hotels",
+    disclosure: "If you book through this link we may earn a commission at no extra cost to you. It funds the verification work.",
+  },
   newsletter: {
     title: "The K Edit Weekly",
     sub: "One weekly drop: new verified spots, whats on in Seoul, and the months Fan Frame. No spam, unsubscribe anytime.",

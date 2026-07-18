@@ -292,6 +292,15 @@ export const zh: Dict = {
     insiderDesc: "无限详细行程、新作攻略提前一周、Insider 通讯与 Discord 身份组。",
     refund: "数字商品 — 未用于生成 PDF 的通行证 14 天内可退款。",
   },
+  affCta: {
+    esimTitle: "出发前备好 eSIM",
+    esimBody: "落地即联网，胜过机场柜台排队。在 Klook 比较韩国 eSIM 套餐 — 两分钟安装，到达即激活。",
+    esimCta: "比较韩国 eSIM",
+    hotelTitle: "先定下住宿区域",
+    hotelBody: "比较本攻略覆盖区域的酒店价格 — 选择免费取消，樱花和红叶季要尽早锁定。",
+    hotelCta: "比较酒店",
+    disclosure: "通过此链接预订，我们可能获得佣金，您无需支付额外费用。收入用于信息核实工作。",
+  },
   newsletter: {
     title: "The K Edit Weekly",
     sub: "每周一期：新核实的取景地、首尔当下、本月粉丝之框。不发垃圾邮件，随时退订。",
