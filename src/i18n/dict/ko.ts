@@ -96,6 +96,7 @@ export const ko: Dict = {
     filmingSpots: "촬영지",
     relatedFood: "작품의 맛",
     tourCta: "가이드 투어가 편하다면? 투어 비교",
+    alsoWatched: "이 작품 팬들이 함께 본 작품",
   },
   spots: {
     title: "전체 촬영지",

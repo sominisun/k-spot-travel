@@ -96,6 +96,7 @@ export const es: Dict = {
     filmingSpots: "Dónde se rodó",
     relatedFood: "Prueba la serie",
     tourCta: "¿Prefieres un tour guiado? Compara tours",
+    alsoWatched: "Los fans de esta también vieron",
   },
   spots: {
     title: "Todas las localizaciones",

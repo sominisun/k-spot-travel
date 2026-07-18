@@ -94,6 +94,7 @@ export const en = {
     filmingSpots: "Where it was filmed",
     relatedFood: "Taste the show",
     tourCta: "Prefer a guided day? Compare tours",
+    alsoWatched: "Fans of this also watched",
   },
   spots: {
     title: "All filming spots",

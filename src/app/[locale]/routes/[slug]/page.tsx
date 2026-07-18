@@ -22,9 +22,11 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
+  const { locale } = await resolveLocale(params);
   const { slug } = await params;
-  const route = getRoute(slug);
-  if (!route) return {};
+  const source = getRoute(slug);
+  if (!source) return {};
+  const route = lRoute(source, locale);
   return { title: route.title, description: route.tagline };
 }
 

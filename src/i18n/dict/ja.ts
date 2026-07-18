@@ -96,6 +96,7 @@ export const ja: Dict = {
     filmingSpots: "ロケ地",
     relatedFood: "作品の味",
     tourCta: "ガイドツアー派なら？ツアーを比較",
+    alsoWatched: "この作品のファンが一緒に観た作品",
   },
   spots: {
     title: "すべてのロケ地",

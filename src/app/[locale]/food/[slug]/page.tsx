@@ -21,10 +21,12 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
+  const { locale, dict } = await resolveLocale(params);
   const { slug } = await params;
-  const r = getRestaurant(slug);
-  if (!r) return {};
-  return { title: `${r.name} — How to Book`, description: r.description };
+  const source = getRestaurant(slug);
+  if (!source) return {};
+  const r = lRestaurant(source, locale);
+  return { title: `${r.name} — ${dict.food.booking}`, description: r.description };
 }
 
 export default async function RestaurantPage({

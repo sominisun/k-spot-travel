@@ -16,7 +16,7 @@ import { lRestaurant, lRoute, lShow, lSpotsOfShow } from "@/lib/localize";
 import { PARTNERS, SITE } from "@/lib/site";
 import { SourcedImage } from "@/components/SourcedImage";
 import { LeafletMap, type MapMarker } from "@/components/LeafletMap";
-import { RestaurantCard, RouteCard } from "@/components/cards";
+import { RestaurantCard, RouteCard, ShowCard } from "@/components/cards";
 import { Icon, Kicker, Pill, Rule } from "@/components/ui";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
@@ -33,11 +33,13 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
+  const { locale, dict } = await resolveLocale(params);
   const { slug } = await params;
-  const show = getShow(slug);
-  if (!show) return {};
+  const source = getShow(slug);
+  if (!source) return {};
+  const show = lShow(source, locale);
   return {
-    title: `${show.title} — Filming Locations`,
+    title: `${show.title} — ${dict.shows.filmingSpots}`,
     description: show.whyVisit,
   };
 }
@@ -60,6 +62,22 @@ export default async function ShowPage({
     .flatMap((r) => restaurantsInRegion(r))
     .slice(0, 3)
     .map((r) => lRestaurant(r, locale));
+
+  // "Fans of this also watched" — shared filming spots first, then shows
+  // set in the same regions (keeps readers inside the catalog).
+  const spotSet = new Set(source.filmingSpots.map((f) => f.spotSlug));
+  const regionSet = new Set(regions);
+  const related = allShows
+    .filter((s) => s.slug !== source.slug)
+    .map((s) => {
+      const shared = s.filmingSpots.filter((f) => spotSet.has(f.spotSlug)).length;
+      const sameRegion = lSpotsOfShow(s, locale).filter(({ spot }) => regionSet.has(spot.region)).length;
+      return { s, score: shared * 10 + sameRegion };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((x) => lShow(x.s, locale));
 
   const markers: MapMarker[] = spots.flatMap(({ spot }) => {
     const g = geoOf(spot.slug);
@@ -194,6 +212,17 @@ export default async function ShowPage({
           <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {food.map((r) => (
               <RestaurantCard key={r.slug} r={r} locale={locale} dict={dict} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {related.length > 0 ? (
+        <section className="mt-10">
+          <h2 className="font-display text-2xl font-bold">{dict.shows.alsoWatched}</h2>
+          <div className="mt-5 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((s) => (
+              <ShowCard key={s.slug} show={s} locale={locale} dict={dict} />
             ))}
           </div>
         </section>

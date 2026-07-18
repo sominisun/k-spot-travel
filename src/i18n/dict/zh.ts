@@ -95,6 +95,7 @@ export const zh: Dict = {
     filmingSpots: "取景地",
     relatedFood: "剧中的味道",
     tourCta: "更喜欢跟团？比较一日游",
+    alsoWatched: "看过这部的粉丝还看了",
   },
   spots: {
     title: "全部取景地",

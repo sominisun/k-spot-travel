@@ -37,10 +37,12 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
+  const { locale, dict } = await resolveLocale(params);
   const { slug } = await params;
-  const spot = getSpot(slug);
-  if (!spot) return {};
-  return { title: `${spot.name} — K-Drama Filming Location`, description: spot.description };
+  const source = getSpot(slug);
+  if (!source) return {};
+  const spot = lSpot(source, locale);
+  return { title: `${spot.name} — ${dict.nav.spots}`, description: spot.description };
 }
 
 export default async function SpotPage({
