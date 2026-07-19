@@ -129,7 +129,7 @@ export const en: LegalL10n = {
     {
       h: "7. Changes & contact",
       ps: [
-        "We may update these terms as the service evolves; material changes will be dated at the top of this page. Questions: hello@k-spot.travel.",
+        "We may update these terms as the service evolves; material changes will be dated at the top of this page. Questions: use the contact page on this site.",
       ],
     },
   ],

@@ -107,7 +107,7 @@ export const es: LegalL10n = {
     {
       h: "7. Cambios y contacto",
       ps: [
-        "Podemos actualizar estos términos a medida que evolucione el servicio; los cambios relevantes llevarán fecha al inicio de esta página. Preguntas: hello@k-spot.travel.",
+        "Podemos actualizar estos términos a medida que evolucione el servicio; los cambios relevantes llevarán fecha al inicio de esta página. Para preguntas, usa la página de contacto del sitio.",
       ],
     },
   ],

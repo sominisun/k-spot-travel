@@ -56,7 +56,7 @@ export function StampsClient({
           `${p.done === p.spots.length ? "■" : "▨"} ${p.title}: ${p.done}/${p.spots.length}`,
       ),
       "",
-      "Track yours → k-spot.travel",
+      "Track yours → kspottravel.com",
     ];
     await navigator.clipboard.writeText(lines.join("\n"));
     setCopied(true);

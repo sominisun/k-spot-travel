@@ -1,8 +1,8 @@
 export const SITE = {
   name: "K-SPOT Travel",
   slogan: "Your K-content is your Korea travel map",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://k-spot.travel",
-  contactEmail: "hello@k-spot.travel",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.kspottravel.com",
+  contactEmail: "hello@kspottravel.com",
   lastVerified: "2026-07",
 } as const;
 
