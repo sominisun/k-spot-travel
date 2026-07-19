@@ -62,6 +62,7 @@ export default async function PlannerPage({
         geo: geoOf(spot.slug) ?? null,
         address: spot.address,
         howToGet: spot.howToGet,
+        koreanName: spot.koreanName,
       })),
     })),
     restaurants: allRestaurants

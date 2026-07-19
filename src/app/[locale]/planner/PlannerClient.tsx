@@ -24,6 +24,7 @@ export interface PlannerData {
       geo: { lat: number; lng: number; approx?: boolean } | null;
       address?: string;
       howToGet?: string;
+      koreanName?: string;
     }[];
   }[];
   restaurants: {
@@ -45,6 +46,7 @@ interface Stop {
   kind: "spot" | "meal" | "evening";
   address?: string;
   howToGet?: string;
+  koreanName?: string;
 }
 interface PlanDay {
   day: number;
@@ -169,7 +171,7 @@ export function PlannerClient({
     // Unique spots with merged scene notes
     const spotMap = new Map<
       string,
-      { name: string; region: string; area: string; notes: string[]; href: string; geo: Stop["geo"]; address?: string; howToGet?: string }
+      { name: string; region: string; area: string; notes: string[]; href: string; geo: Stop["geo"]; address?: string; howToGet?: string; koreanName?: string }
     >();
     for (const show of shows) {
       for (const sp of show.spots) {
@@ -180,7 +182,7 @@ export function PlannerClient({
           spotMap.set(sp.slug, {
             name: sp.name, region: sp.region, area: sp.area,
             notes: [note], href: `/spots/${sp.slug}`, geo: sp.geo,
-            address: sp.address, howToGet: sp.howToGet,
+            address: sp.address, howToGet: sp.howToGet, koreanName: sp.koreanName,
           });
       }
     }
@@ -242,7 +244,7 @@ export function PlannerClient({
           const sp = spotMap.get(slug)!;
           const geo = (sp.geo as GeoPt | null) ?? null;
           if (stops.length > 0) clock += travelMinutes(prevGeo, geo);
-          stops.push({ time: fmtClock(round5(clock)), label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot", address: sp.address, howToGet: sp.howToGet });
+          stops.push({ time: fmtClock(round5(clock)), label: sp.name, note: sp.notes.join(" · "), href: sp.href, geo: sp.geo, kind: "spot", address: sp.address, howToGet: sp.howToGet, koreanName: sp.koreanName });
           clock += dwell;
           if (geo) prevGeo = geo;
         };
@@ -390,7 +392,7 @@ export function PlannerClient({
         day: d.day, theme: d.theme,
         stops: d.stops.map((s) => ({
           time: s.time, label: s.label, note: s.note, kind: s.kind,
-          address: s.address, howToGet: s.howToGet,
+          address: s.address, howToGet: s.howToGet, koreanName: s.koreanName,
         })),
       })),
       deadlines,
