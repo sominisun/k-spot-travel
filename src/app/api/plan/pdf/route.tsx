@@ -31,6 +31,7 @@ const C = {
   get Page() { return RPm.Page; },
   get Text() { return RPm.Text; },
   get View() { return RPm.View; },
+  get Image() { return RPm.Image; },
 };
 
 interface PdfStop {
@@ -135,9 +136,10 @@ const s = {
   bulletRow: { flexDirection: "row", marginBottom: 7, alignItems: "flex-start" },
   bulletSq: { width: 6, height: 6, backgroundColor: OB.yellow, marginTop: 3.5, marginRight: 9 },
   bulletTx: { flex: 1, fontSize: 10, color: SOFT, lineHeight: 1.45 },
-  coverBottom: { position: "absolute", left: 48, right: 48, bottom: 84 },
+  coverBottom: { position: "absolute", left: 48, right: 48, bottom: 84, flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
   slogan: { fontSize: 10, fontWeight: 700, color: OB.blue },
   preparedBy: { fontSize: 8.5, color: FAINT, marginTop: 4 },
+  seal: { width: 52, height: 52 },
   dayBand: { backgroundColor: OB.blue, flexDirection: "row", alignItems: "center", paddingHorizontal: 13, paddingVertical: 9 },
   dayNum: { color: OB.white, fontSize: 14, fontWeight: 700, marginRight: 14 },
   dayTheme: { color: "#C7D2E4", fontSize: 10, fontWeight: 700, flex: 1 },
@@ -211,7 +213,8 @@ const sectionHead = (title: string) =>
     h(C.View, { style: s.secRule }),
   );
 
-function buildDoc(payload: PdfPayload) {
+function buildDoc(payload: PdfPayload, origin: string) {
+  const sealSrc = `${origin}/kspot-seal.png`;
   const start = parseStart(payload.startDate);
   const nDays = payload.days?.length ?? 0;
   const lo = 70 * nDays;
@@ -276,8 +279,13 @@ function buildDoc(payload: PdfPayload) {
     h(
       C.View,
       { style: s.coverBottom },
-      h(C.Text, { style: s.slogan }, "Your K-content is your Korea travel map"),
-      h(C.Text, { style: s.preparedBy }, "Prepared by the K-SPOT editors  ·  kspottravel.com"),
+      h(
+        C.View,
+        null,
+        h(C.Text, { style: s.slogan }, "Your K-content is your Korea travel map"),
+        h(C.Text, { style: s.preparedBy }, "Prepared by the K-SPOT editors  ·  kspottravel.com"),
+      ),
+      h(C.Image, { style: s.seal, src: sealSrc }),
     ),
     footer(),
   );
@@ -423,8 +431,9 @@ export async function POST(request: NextRequest) {
   }
 
   await ensureEngine();
-  registerFonts(new URL(request.url).origin);
-  const pdf = await RPm.renderToBuffer(buildDoc(payload) as never);
+  const origin = new URL(request.url).origin;
+  registerFonts(origin);
+  const pdf = await RPm.renderToBuffer(buildDoc(payload, origin) as never);
 
   // Email path: only when a Resend key is configured; otherwise the client
   // falls back to direct download (demo mode).
