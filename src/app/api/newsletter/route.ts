@@ -38,12 +38,17 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  await notifyOperator({
+  const { delivered } = await notifyOperator({
     kind: "newsletter",
     subject: `[K-SPOT newsletter] signup: ${email}`,
     text: `Newsletter signup: ${email} (${locale}) — add to the Resend audience.`,
     logFile: "newsletter.jsonl",
     logEntry: { email, locale },
   });
+  // Same honesty rule as the contact form: no channel on serverless = the
+  // address would be lost, so surface an error rather than a fake success.
+  if (!delivered && process.env.VERCEL) {
+    return NextResponse.json({ ok: false, error: "inbox-not-configured" }, { status: 503 });
+  }
   return NextResponse.json({ ok: true, queued: true });
 }

@@ -23,12 +23,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "invalid" }, { status: 400 });
   }
 
-  await notifyOperator({
+  const { delivered } = await notifyOperator({
     kind: `contact${topic ? ` · ${topic}` : ""}`,
     subject: `[K-SPOT contact] ${email} (${locale})`,
     text: `From: ${email} (${locale})${topic ? `\nTopic: ${topic}` : ""}\n\n${message}`,
     logFile: "contact.jsonl",
     logEntry: { email, topic, message, locale },
   });
+  // On serverless the local log is ephemeral: if no delivery channel is
+  // configured, fail honestly instead of pretending the message arrived.
+  if (!delivered && process.env.VERCEL) {
+    return NextResponse.json({ ok: false, error: "inbox-not-configured" }, { status: 503 });
+  }
   return NextResponse.json({ ok: true });
 }
