@@ -135,11 +135,9 @@ const s = {
   bulletRow: { flexDirection: "row", marginBottom: 7, alignItems: "flex-start" },
   bulletSq: { width: 6, height: 6, backgroundColor: OB.yellow, marginTop: 3.5, marginRight: 9 },
   bulletTx: { flex: 1, fontSize: 10, color: SOFT, lineHeight: 1.45 },
-  coverBottom: { position: "absolute", left: 48, right: 48, bottom: 84, flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
+  coverBottom: { position: "absolute", left: 48, right: 48, bottom: 84 },
   slogan: { fontSize: 10, fontWeight: 700, color: OB.blue },
   preparedBy: { fontSize: 8.5, color: FAINT, marginTop: 4 },
-  seal: { width: 40, height: 40, backgroundColor: OB.red, alignItems: "center", justifyContent: "center" },
-  sealTx: { color: OB.white, fontSize: 13, fontWeight: 700, lineHeight: 1.15 },
   dayBand: { backgroundColor: OB.blue, flexDirection: "row", alignItems: "center", paddingHorizontal: 13, paddingVertical: 9 },
   dayNum: { color: OB.white, fontSize: 14, fontWeight: 700, marginRight: 14 },
   dayTheme: { color: "#C7D2E4", fontSize: 10, fontWeight: 700, flex: 1 },
@@ -278,13 +276,8 @@ function buildDoc(payload: PdfPayload) {
     h(
       C.View,
       { style: s.coverBottom },
-      h(
-        C.View,
-        null,
-        h(C.Text, { style: s.slogan }, "Your K-content is your Korea travel map"),
-        h(C.Text, { style: s.preparedBy }, "Prepared by the K-SPOT editors  ·  kspottravel.com"),
-      ),
-      h(C.View, { style: s.seal }, h(C.Text, { style: s.sealTx }, "K"), h(C.Text, { style: s.sealTx }, "S")),
+      h(C.Text, { style: s.slogan }, "Your K-content is your Korea travel map"),
+      h(C.Text, { style: s.preparedBy }, "Prepared by the K-SPOT editors  ·  kspottravel.com"),
     ),
     footer(),
   );
