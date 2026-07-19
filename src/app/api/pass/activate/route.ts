@@ -28,8 +28,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "invalid-key" }, { status: 402 });
   }
 
-  // Insider memberships are recognized by their Lemon Squeezy product id.
-  const insiderId = Number(process.env.LEMONSQUEEZY_INSIDER_PRODUCT_ID);
+  // Insider memberships are recognized by their Creem product id.
+  const insiderId = process.env.CREEM_INSIDER_PRODUCT_ID;
   const tier = insiderId && productId === insiderId ? "insider" : "pass";
   return NextResponse.json({ ok: true, token: issuePassToken(tier), tier });
 }

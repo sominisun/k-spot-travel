@@ -184,7 +184,7 @@ export const en = {
     downloadPdf: "Download PDF",
     bookingDeadlines: "Booking deadlines for this plan",
     demoUnlock: "Demo unlock (payments not configured)",
-    demoNote: "Payment is in demo mode until a Lemon Squeezy store is connected.",
+    demoNote: "Payment runs in demo mode until the payment store is connected.",
     haveKey: "Already bought it? Enter your license key",
     licensePlaceholder: "License key from your purchase email",
     activate: "Activate",

@@ -184,7 +184,7 @@ export const zh: Dict = {
     downloadPdf: "下载 PDF",
     bookingDeadlines: "本行程的订位截止",
     demoUnlock: "演示解锁（未接入支付）",
-    demoNote: "接入 Lemon Squeezy 商店前，支付为演示模式。",
+    demoNote: "接入支付商店前，支付为演示模式。",
     haveKey: "已经购买？输入你的授权码",
     licensePlaceholder: "购买确认邮件中的授权码",
     activate: "激活",

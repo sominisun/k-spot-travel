@@ -14,7 +14,7 @@ function b64url(buf: Buffer): string {
 
 /** Whether the paid gate is enforced. Off (demo) until both keys exist. */
 export function paymentsConfigured(): boolean {
-  return Boolean(SECRET && process.env.LEMONSQUEEZY_API_KEY);
+  return Boolean(SECRET && process.env.CREEM_API_KEY);
 }
 
 export type PassTier = "pass" | "insider";
@@ -50,36 +50,40 @@ export function verifyPassToken(token: string | null | undefined): boolean {
 }
 
 /**
- * Validate a Lemon Squeezy license key via their API.
- * Returns validity plus the product id, so the caller can distinguish a
- * Route Pass purchase from an Insider membership
- * (LEMONSQUEEZY_INSIDER_PRODUCT_ID).
+ * Validate a Creem license key. Tries to activate an instance first (which
+ * consumes one of the product's activation slots); if activation is refused
+ * (e.g. the limit is reached but the license itself is fine), falls back to
+ * plain validation. Returns validity plus the product id, so the caller can
+ * distinguish a Route Pass purchase from an Insider membership
+ * (CREEM_INSIDER_PRODUCT_ID). Set CREEM_TEST_MODE=1 to hit the sandbox API.
  */
 export async function validateLicenseKey(
   licenseKey: string,
-): Promise<{ valid: boolean; productId?: number }> {
-  const apiKey = process.env.LEMONSQUEEZY_API_KEY;
+): Promise<{ valid: boolean; productId?: string }> {
+  const apiKey = process.env.CREEM_API_KEY;
   if (!apiKey || !licenseKey) return { valid: false };
-  try {
-    const res = await fetch("https://api.lemonsqueezy.com/v1/licenses/validate", {
+  const base = process.env.CREEM_TEST_MODE
+    ? "https://test-api.creem.io"
+    : "https://api.creem.io";
+  const call = (path: string, body: Record<string, string>) =>
+    fetch(`${base}/v1/licenses/${path}`, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: new URLSearchParams({ license_key: licenseKey.trim() }),
+      headers: { "Content-Type": "application/json", "x-api-key": apiKey },
+      body: JSON.stringify(body),
     });
+  try {
+    const key = licenseKey.trim();
+    let res = await call("activate", { key, instance_name: "kspot-web" });
+    if (!res.ok) res = await call("validate", { key });
     if (!res.ok) return { valid: false };
     const data = (await res.json()) as {
-      valid?: boolean;
-      license_key?: { status?: string };
-      meta?: { product_id?: number };
+      status?: string;
+      product_id?: string;
+      license?: { status?: string; product_id?: string };
     };
-    return {
-      valid: Boolean(data.valid && data.license_key?.status !== "disabled"),
-      productId: data.meta?.product_id,
-    };
+    const status = data.status ?? data.license?.status;
+    const productId = data.product_id ?? data.license?.product_id;
+    return { valid: status === "active", productId };
   } catch {
     return { valid: false };
   }

@@ -18,8 +18,8 @@ export const ADSENSE = {
 
 /** Monetization ladder — checkout links come alive via env; demo mode otherwise. */
 export const PAYMENTS = {
-  passCheckoutUrl: process.env.NEXT_PUBLIC_LS_PASS_URL ?? "",
-  insiderCheckoutUrl: process.env.NEXT_PUBLIC_LS_INSIDER_URL ?? "",
+  passCheckoutUrl: process.env.NEXT_PUBLIC_CHECKOUT_PASS_URL ?? "",
+  insiderCheckoutUrl: process.env.NEXT_PUBLIC_CHECKOUT_INSIDER_URL ?? "",
   get demoMode() {
     return !this.passCheckoutUrl;
   },

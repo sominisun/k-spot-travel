@@ -186,7 +186,7 @@ export const ja: Dict = {
     downloadPdf: "PDFをダウンロード",
     bookingDeadlines: "このプランの予約締切",
     demoUnlock: "デモ解除（決済未接続）",
-    demoNote: "Lemon Squeezyストア接続まで、決済はデモモードです。",
+    demoNote: "決済ストアが接続されるまで、決済はデモモードです。",
     haveKey: "すでに購入済みですか？ライセンスキーを入力",
     licensePlaceholder: "購入確認メールのライセンスキー",
     activate: "有効化",

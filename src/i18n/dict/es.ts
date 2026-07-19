@@ -186,7 +186,7 @@ export const es: Dict = {
     downloadPdf: "Descargar PDF",
     bookingDeadlines: "Plazos de reserva de este plan",
     demoUnlock: "Desbloqueo demo (pagos sin configurar)",
-    demoNote: "El pago está en modo demo hasta conectar la tienda de Lemon Squeezy.",
+    demoNote: "El pago está en modo demo hasta conectar la tienda de pagos.",
     haveKey: "¿Ya lo compraste? Introduce tu clave de licencia",
     licensePlaceholder: "Clave de licencia del email de compra",
     activate: "Activar",

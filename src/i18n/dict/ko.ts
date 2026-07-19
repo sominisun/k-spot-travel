@@ -186,7 +186,7 @@ export const ko: Dict = {
     downloadPdf: "PDF 다운로드",
     bookingDeadlines: "이 일정의 예약 마감일",
     demoUnlock: "데모 잠금해제 (결제 미연결)",
-    demoNote: "Lemon Squeezy 스토어 연결 전까지 결제는 데모 모드입니다.",
+    demoNote: "결제 스토어가 연결되기 전까지 결제는 데모 모드입니다.",
     haveKey: "이미 구매하셨나요? 라이선스 키를 입력하세요",
     licensePlaceholder: "구매 확인 메일의 라이선스 키",
     activate: "활성화",
