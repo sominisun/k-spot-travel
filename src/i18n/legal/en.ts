@@ -54,7 +54,7 @@ export const en: LegalL10n = {
         "Chatbot logs: questions asked to the “Ask the Editor” assistant are stored anonymously (no account, session-scoped) so we can improve answers and write the guides people actually need. Do not include personal data in chat messages.",
         "Local storage: your wishlist hearts, pilgrimage stamps, cookie choice and Route Pass status are stored in YOUR browser only — we never see them and they never leave your device.",
         "Email addresses: only when you explicitly provide one — to receive a Route Pass PDF or (in future) the newsletter. Used solely for that purpose.",
-        "Payments: processed entirely by our merchant of record (Lemon Squeezy). We never see or store card numbers; we receive only order confirmation and the email needed to deliver your purchase.",
+        "Payments: processed entirely by our merchant of record (Creem). We never see or store card numbers; we receive only order confirmation and the email needed to deliver your purchase.",
       ],
     },
     {
@@ -67,7 +67,7 @@ export const en: LegalL10n = {
     {
       h: "Sharing",
       ps: [
-        "We do not sell personal data. Service providers we rely on: hosting (Vercel), payments (Lemon Squeezy), transactional email (Resend), community (Discord — governed by Discord's own policies when you join). Outbound affiliate links (Klook, Trazy, Olive Young Global, StyleKorean, YesStyle, Agoda and similar) are governed by those sites' policies once you leave ours.",
+        "We do not sell personal data. Service providers we rely on: hosting (Vercel), payments (Creem), transactional email (Resend), community (Discord — governed by Discord's own policies when you join). Outbound affiliate links (Klook, Trazy, Olive Young Global, StyleKorean, YesStyle, Agoda and similar) are governed by those sites' policies once you leave ours.",
       ],
     },
     {
@@ -102,8 +102,8 @@ export const en: LegalL10n = {
     {
       h: "3. Paid products: Route Pass & Insider",
       ps: [
-        "The Route Pass (one-time) and K-SPOT Insider (subscription) are digital products sold through our merchant of record, Lemon Squeezy, which handles payment, applicable taxes and receipts.",
-        "Refunds: a Route Pass that has not been used to generate a delivered PDF is refundable within 14 days of purchase. Insider subscriptions can be cancelled any time and remain active until the end of the paid period; the current billing period is not refunded once its early-access drops have been delivered. Contact us (or Lemon Squeezy support) with your order email to process a refund.",
+        "The Route Pass ($4.90 one-time) and K-SPOT Insider ($3.90/month) are digital products sold through our merchant of record, Creem, which handles payment, applicable taxes and receipts. Current prices are always shown on the Pricing page before checkout.",
+        "Refunds: a Route Pass that has not been used to generate a delivered PDF is refundable within 14 days of purchase. Insider subscriptions can be cancelled any time and remain active until the end of the paid period; the current billing period is not refunded once its early-access drops have been delivered. Contact us (or Creem support) with your order email to process a refund.",
         "Planner outputs are personal travel suggestions generated from our editorial database; they are not professional advice and may contain scheduling imperfections — check opening days for anything critical.",
       ],
     },

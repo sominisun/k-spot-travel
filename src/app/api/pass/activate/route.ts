@@ -7,7 +7,7 @@ import {
 
 export const runtime = "nodejs";
 
-// Exchange a Lemon Squeezy license key (from the Route Pass purchase) for a
+// Exchange a Creem license key (from the Route Pass purchase) for a
 // signed pass token. No account/DB — the token itself is the proof.
 export async function POST(request: NextRequest) {
   // Demo mode (no payments configured): unlock freely so the flow is testable.

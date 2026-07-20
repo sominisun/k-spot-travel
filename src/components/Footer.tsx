@@ -21,6 +21,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
       title: f.plan,
       links: [
         { href: l(locale, "/planner"), label: dict.nav.planner },
+        { href: l(locale, "/pricing"), label: f.pricing },
         { href: l(locale, "/routes"), label: dict.nav.routes },
         { href: l(locale, "/map"), label: dict.nav.map },
         { href: l(locale, "/quiz"), label: dict.nav.quiz },

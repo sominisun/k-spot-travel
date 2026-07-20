@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { l } from "@/i18n/config";
 import { localeParams, resolveLocale } from "@/lib/page-utils";
 import { allRestaurants, allShows, geoOf } from "@/lib/data";
 import { lRestaurant, lShow, lSpotsOfShow } from "@/lib/localize";
@@ -81,6 +83,12 @@ export default async function PlannerPage({
     <div className="mx-auto max-w-4xl px-4 py-10">
       <SectionHeading title={dict.planner.title} />
       <p className="mt-2 max-w-2xl text-ink-soft">{dict.planner.sub}</p>
+      <p className="mt-2 max-w-2xl text-sm text-ink-faint">
+        {dict.planner.pricingLine}{" "}
+        <Link href={l(locale, "/pricing")} className="font-semibold text-indigo hover:underline">
+          {dict.planner.seePricing} →
+        </Link>
+      </p>
       <PlannerClient
         locale={locale}
         dict={dict}
