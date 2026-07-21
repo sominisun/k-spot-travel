@@ -373,6 +373,7 @@ export const ja: Dict = {
     refundNote: "ルートパス：PDF発行前なら購入後14日以内は全額返金。Insider：いつでも解約でき、支払済み期間の終了まで利用できます。詳細は利用規約をご覧ください。",
     termsLink: "利用規約を読む",
     popular: "一番人気",
+    supportLabel: "決済・購入に関するお問い合わせ:",
   },
   footer: {
     tagline: "あなたが観たKコンテンツが、韓国旅行の地図になる。",
@@ -384,6 +385,7 @@ export const ja: Dict = {
     privacy: "プライバシーポリシー",
     terms: "利用規約",
     pricing: "料金",
+    support: "カスタマーサポート",
     drops: "ウィークリードロップ",
     disclaimer:
       "K-SPOT Travelは独立したファンメイドの旅行ガイドです。Netflix・Disney+・Apple TV+および制作会社とは無関係で、作品名は識別目的でのみ使用し、著作権のある映像・スチールは使用しません。",

@@ -372,6 +372,7 @@ export const en = {
     refundNote: "Route Pass: full refund within 14 days if you haven't generated a delivered PDF. Insider: cancel anytime — access continues to the end of the paid period. Details in our Terms of use.",
     termsLink: "Read the Terms of use",
     popular: "Most popular",
+    supportLabel: "Questions about billing or your purchase?",
   },
   footer: {
     tagline: "Your K-content is your Korea travel map.",
@@ -383,6 +384,7 @@ export const en = {
     privacy: "Privacy policy",
     terms: "Terms of use",
     pricing: "Pricing",
+    support: "Customer support",
     drops: "Weekly Drop",
     disclaimer:
       "K-SPOT Travel is an independent fan-made travel guide. Not affiliated with Netflix, Disney+, Apple TV+ or any production company. Titles referenced for identification only; no copyrighted footage or stills are used.",

@@ -60,6 +60,18 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dict }) {
               <NewsletterForm locale={locale} dict={dict} compact />
             </div>
           </div>
+          <p className="mt-4 text-sm">
+            <span className="text-[11px] font-bold tracking-[0.18em] text-ink-faint uppercase">
+              {f.support}
+            </span>
+            <br />
+            <a
+              href={`mailto:${SITE.contactEmail}`}
+              className="font-semibold text-indigo hover:underline"
+            >
+              {SITE.contactEmail}
+            </a>
+          </p>
           <p className="mt-4 max-w-sm text-xs leading-relaxed text-ink-faint">
             {f.disclaimer}
           </p>

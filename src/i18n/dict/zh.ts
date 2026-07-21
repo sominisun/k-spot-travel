@@ -371,6 +371,7 @@ export const zh: Dict = {
     refundNote: "路线通行证：若尚未生成 PDF，购买后 14 天内可全额退款。Insider：可随时取消，权益持续到已付费周期结束。详见使用条款。",
     termsLink: "阅读使用条款",
     popular: "最受欢迎",
+    supportLabel: "关于付款或购买的疑问：",
   },
   footer: {
     tagline: "你看过的 K-内容，就是你的韩国旅行地图。",
@@ -382,6 +383,7 @@ export const zh: Dict = {
     privacy: "隐私政策",
     terms: "使用条款",
     pricing: "价格",
+    support: "客户支持",
     drops: "每周速递",
     disclaimer:
       "K-SPOT Travel 是独立的粉丝自制旅行指南，与 Netflix、Disney+、Apple TV+ 及任何制作公司无关。作品名称仅用于识别，不使用任何受版权保护的影像或剧照。",

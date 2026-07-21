@@ -374,6 +374,7 @@ export const es: Dict = {
     refundNote: "Route Pass: reembolso completo en 14 días si no has generado un PDF. Insider: cancela cuando quieras — el acceso continúa hasta el final del periodo pagado. Detalles en los Términos de uso.",
     termsLink: "Leer los Términos de uso",
     popular: "Más popular",
+    supportLabel: "¿Dudas sobre pagos o tu compra?",
   },
   footer: {
     tagline: "El K-content que viste es tu mapa de viaje por Corea.",
@@ -385,6 +386,7 @@ export const es: Dict = {
     privacy: "Política de privacidad",
     terms: "Términos de uso",
     pricing: "Precios",
+    support: "Atención al cliente",
     drops: "Drop semanal",
     disclaimer:
       "K-SPOT Travel es una guía de viaje independiente hecha por fans. Sin afiliación con Netflix, Disney+, Apple TV+ ni productoras. Los títulos se citan solo para identificación; no se usan imágenes con copyright.",

@@ -373,6 +373,7 @@ export const ko: Dict = {
     refundNote: "루트 패스: PDF를 발급받지 않았다면 구매 후 14일 이내 전액 환불. Insider: 언제든 해지 가능하며 결제 기간 종료까지 이용됩니다. 자세한 내용은 이용약관을 확인하세요.",
     termsLink: "이용약관 보기",
     popular: "가장 인기",
+    supportLabel: "결제·구매 관련 문의:",
   },
   footer: {
     tagline: "당신이 본 K-콘텐츠가 곧 한국 여행 지도가 됩니다.",
@@ -384,6 +385,7 @@ export const ko: Dict = {
     privacy: "개인정보처리방침",
     terms: "이용약관",
     pricing: "요금 안내",
+    support: "고객 지원",
     drops: "주간 드롭",
     disclaimer:
       "K-SPOT Travel은 독립적인 팬 제작 여행 가이드입니다. 넷플릭스·디즈니+·애플TV+ 및 제작사와 무관하며, 작품명은 식별 목적으로만 사용하고 저작권이 있는 영상·스틸컷은 사용하지 않습니다.",

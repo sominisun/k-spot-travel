@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { l } from "@/i18n/config";
 import { localeParams, resolveLocale } from "@/lib/page-utils";
-import { PAYMENTS } from "@/lib/site";
+import { PAYMENTS, SITE } from "@/lib/site";
 import { Icon, Kicker } from "@/components/ui";
 
 export function generateStaticParams() {
@@ -121,6 +121,15 @@ export default async function PricingPage({
         >
           {p.termsLink} →
         </Link>
+        <p className="mt-4 border-t border-line pt-4 text-sm text-ink-soft">
+          {p.supportLabel}{" "}
+          <a
+            href={`mailto:${SITE.contactEmail}`}
+            className="font-semibold text-indigo hover:underline"
+          >
+            {SITE.contactEmail}
+          </a>
+        </p>
       </section>
     </div>
   );

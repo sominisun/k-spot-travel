@@ -3,7 +3,7 @@ import Link from "next/link";
 import { l } from "@/i18n/config";
 import { getLegal } from "@/i18n/legal";
 import { localeParams, resolveLocale } from "@/lib/page-utils";
-import { COMMUNITY } from "@/lib/site";
+import { COMMUNITY, SITE } from "@/lib/site";
 import { Icon, SectionHeading } from "@/components/ui";
 import { ContactForm } from "@/components/ContactForm";
 
@@ -30,6 +30,12 @@ export default async function ContactPage({
   const c = legal.contact;
 
   const rows = [
+    {
+      title: c.rows[0].title,
+      body: SITE.contactEmail,
+      href: `mailto:${SITE.contactEmail}` as string | null,
+      note: c.rows[0].note,
+    },
     {
       title: c.rows[1].title,
       body: c.rows[1].body ?? "Discord",
