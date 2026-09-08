@@ -9,12 +9,23 @@ const LENS_EVENT = "ks2:lens-event";
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 type LensEventDetail = Record<string, string> & { name: string };
+type ConsentState = "granted" | "denied";
 
 declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    __ks2GaConfigured?: boolean;
   }
+}
+
+function updateGoogleConsent(state: ConsentState) {
+  window.gtag?.("consent", "update", {
+    analytics_storage: state,
+    ad_storage: state,
+    ad_user_data: state,
+    ad_personalization: state,
+  });
 }
 
 export function AnalyticsBridge() {
@@ -28,12 +39,22 @@ export function AnalyticsBridge() {
   );
 
   useEffect(() => {
-    if (!enabled || !measurementId) return;
+    if (!measurementId) return;
 
     window.dataLayer = window.dataLayer ?? [];
     window.gtag = window.gtag ?? ((...args: unknown[]) => window.dataLayer?.push(args));
-    window.gtag("js", new Date());
-    window.gtag("config", measurementId, { anonymize_ip: true });
+    updateGoogleConsent(enabled ? "granted" : "denied");
+    if (!enabled) return;
+
+    if (!window.__ks2GaConfigured) {
+      const debugMode = new URLSearchParams(window.location.search).get("ga_debug") === "1";
+      window.gtag("js", new Date());
+      window.gtag("config", measurementId, {
+        anonymize_ip: true,
+        debug_mode: debugMode,
+      });
+      window.__ks2GaConfigured = true;
+    }
 
     const forwardLensEvent = (event: Event) => {
       const detail = (event as CustomEvent<LensEventDetail>).detail;
@@ -43,6 +64,7 @@ export function AnalyticsBridge() {
       window.gtag?.("event", name, {
         ...parameters,
         event_category: "korea_lens",
+        lens_slug: "when-life-gives-you-tangerines",
       });
     };
 

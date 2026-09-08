@@ -12,6 +12,7 @@ export function SourcedImage({
   ratio = "aspect-[3/2]",
   sizes = "(min-width: 1024px) 50vw, 100vw",
   priority = false,
+  unoptimized = false,
   className = "",
   fallbackTitle,
   fallbackNote,
@@ -22,6 +23,8 @@ export function SourcedImage({
   ratio?: string;
   sizes?: string;
   priority?: boolean;
+  /** Bypass the Next image proxy for a source that is unstable behind the optimizer. */
+  unoptimized?: boolean;
   className?: string;
   /** Rendered in the quiet typographic block when no licensed photo exists yet */
   fallbackTitle?: string;
@@ -55,6 +58,7 @@ export function SourcedImage({
           fill
           sizes={sizes}
           priority={priority}
+          unoptimized={unoptimized}
           className="object-cover"
         />
       </div>

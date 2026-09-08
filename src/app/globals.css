@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("../");
 
 /* ---- Design constitution: white paper, ink, one indigo. 4px/8px radii. ---- */
 @theme {
@@ -59,4 +59,15 @@ body {
 
 .leaflet-popup-content-wrapper {
   border-radius: 8px !important;
+}
+
+/* The Korea Lens pilot is a self-contained landing experience. */
+body:has(.korea-lens-landing) {
+  background: #fffaf3;
+}
+
+body:has(.korea-lens-landing) > header,
+body:has(.korea-lens-landing) > footer,
+body:has(.korea-lens-landing) > button {
+  display: none;
 }

@@ -17,10 +17,12 @@ import { PARTNERS, SITE } from "@/lib/site";
 import { SourcedImage } from "@/components/SourcedImage";
 import { LeafletMap, type MapMarker } from "@/components/LeafletMap";
 import { RestaurantCard, RouteCard, ShowCard } from "@/components/cards";
-import { Icon, Kicker, Pill, Rule } from "@/components/ui";
+import { Icon, Pill, Rule } from "@/components/ui";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { ADSENSE } from "@/lib/site";
+import { KoreaLensPilot } from "@/components/KoreaLensPilot";
+import { wlgYTJejuLens } from "@/data/korea-lens";
 
 export function generateStaticParams() {
   return LOCALES.flatMap((locale) =>
@@ -37,6 +39,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const source = getShow(slug);
   if (!source) return {};
+  if (slug === wlgYTJejuLens.slug && locale === "en") {
+    return {
+      title: wlgYTJejuLens.seo.title,
+      description: wlgYTJejuLens.seo.description,
+      keywords: wlgYTJejuLens.seo.keywords,
+      alternates: {
+        canonical: `/en/shows/${wlgYTJejuLens.slug}`,
+      },
+    };
+  }
   const show = lShow(source, locale);
   return {
     title: `${show.title} — ${dict.shows.filmingSpots}`,
@@ -53,6 +65,28 @@ export default async function ShowPage({
   const { slug } = await params;
   const source = getShow(slug);
   if (!source) notFound();
+
+  if (slug === wlgYTJejuLens.slug && locale === "en") {
+    return (
+      <>
+        <KoreaLensPilot locale={locale} />
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: wlgYTJejuLens.title,
+            description: wlgYTJejuLens.seo.description,
+            dateModified: wlgYTJejuLens.lastEditorialReview,
+            about: {
+              "@type": "TVSeries",
+              name: "When Life Gives You Tangerines",
+              alternateName: wlgYTJejuLens.originalTitle,
+            },
+          }}
+        />
+      </>
+    );
+  }
   const show = lShow(source, locale);
 
   const spots = lSpotsOfShow(source, locale);

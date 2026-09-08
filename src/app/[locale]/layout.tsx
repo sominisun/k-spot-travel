@@ -12,6 +12,18 @@ import { ChatDock } from "@/components/ChatDock";
 import { CookieConsent } from "@/components/CookieConsent";
 import { AnalyticsBridge } from "@/components/AnalyticsBridge";
 
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const GA_CONSENT_DEFAULT = `
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+window.gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  wait_for_update: 500
+});`;
+
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
@@ -57,6 +69,14 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${FONT_VARS} ${localeClass(locale)}`}>
+      {GA_MEASUREMENT_ID ? (
+        <head>
+          <script
+            id="ks2-google-consent-default"
+            dangerouslySetInnerHTML={{ __html: GA_CONSENT_DEFAULT }}
+          />
+        </head>
+      ) : null}
       <body>
         {ADSENSE.client ? (
           <Script

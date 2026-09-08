@@ -4,6 +4,7 @@ import { allRestaurants, allRoutes, allSpots } from "@/lib/data";
 import { lRoute, lSpot } from "@/lib/localize";
 import { SectionHeading } from "@/components/ui";
 import { SavedClient, type SavedItem } from "./SavedClient";
+import { wlgYTJejuLens } from "@/data/korea-lens";
 
 export function generateStaticParams() {
   return localeParams();
@@ -29,6 +30,12 @@ export default async function SavedPage({
   const { locale, dict } = await resolveLocale(params);
 
   const catalog: SavedItem[] = [
+    ...wlgYTJejuLens.choices.map((choice) => ({
+      id: `lens:${wlgYTJejuLens.slug}:${choice.id}`,
+      title: `${wlgYTJejuLens.title.split(" — ")[1]} — ${choice.label}`,
+      sub: `Korea Lens · ${choice.durationLabel}`,
+      href: `/shows/${wlgYTJejuLens.slug}`,
+    })),
     ...allSpots.map(lSpotWith(locale)).map((s) => ({
       id: `spot:${s.slug}`,
       title: s.name,
