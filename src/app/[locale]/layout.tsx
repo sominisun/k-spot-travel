@@ -10,6 +10,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ChatDock } from "@/components/ChatDock";
 import { CookieConsent } from "@/components/CookieConsent";
+import { AnalyticsBridge } from "@/components/AnalyticsBridge";
 
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
@@ -69,6 +70,7 @@ export default async function LocaleLayout({
         <main className="min-h-[70vh]">{children}</main>
         <Footer locale={locale} dict={dict} />
         <ChatDock locale={locale} dict={dict.chat} />
+        <AnalyticsBridge />
         <CookieConsent locale={locale} />
       </body>
     </html>

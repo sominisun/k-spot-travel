@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { l, type Locale } from "@/i18n/config";
 
 const KEY = "ks2-consent";
+const CONSENT_EVENT = "ks2:consent-change";
 
 const COPY: Record<string, { text: string; accept: string; decline: string; policy: string }> = {
   en: {
@@ -40,18 +41,21 @@ const COPY: Record<string, { text: string; accept: string; decline: string; poli
 };
 
 export function CookieConsent({ locale }: { locale: Locale }) {
-  const [show, setShow] = useState(false);
   const c = COPY[locale] ?? COPY.en;
-
-  useEffect(() => {
-    setShow(!localStorage.getItem(KEY));
-  }, []);
+  const show = useSyncExternalStore(
+    (onStoreChange) => {
+      window.addEventListener(CONSENT_EVENT, onStoreChange);
+      return () => window.removeEventListener(CONSENT_EVENT, onStoreChange);
+    },
+    () => !localStorage.getItem(KEY),
+    () => false,
+  );
 
   if (!show) return null;
 
   const set = (v: string) => {
     localStorage.setItem(KEY, v);
-    setShow(false);
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: { state: v } }));
   };
 
   return (
